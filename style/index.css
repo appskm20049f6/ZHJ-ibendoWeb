@@ -5,6 +5,16 @@
           box-sizing: border-box;
 }
 
+body {
+  width: 100vw;
+  height: 100vh;
+  background-image: url("/img/index/backgrond.png");
+  background-color: #f0e6ce;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+}
+
 .lightbox {
   display: none;
   width: 100vw;
@@ -31,6 +41,37 @@
           justify-content: flex-end;
 }
 
+.ibenlogo {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  margin-bottom: 6%;
+}
+
+.login {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 2rem;
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  -webkit-transform: translate(-50%);
+          transform: translate(-50%);
+  background-image: url("/img/index/login-border.png");
+  width: 665px;
+  height: 180px;
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: flex-end;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
 .eventdescription {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -40,23 +81,17 @@
           justify-content: flex-end;
 }
 
-.login {
-  text-align: center;
-  background-color: rgb(30, 255, 0);
-  margin-bottom: 3rem;
-}
-
 .navbar {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  gap: 10rem;
+  gap: 4rem;
   margin-bottom: 2rem;
 }
 
