@@ -10,11 +10,7 @@ body {
   background-image: url("/img/index/backgrond.png");
   background-color: #f0e6ce;
   background-repeat: no-repeat;
-<<<<<<< HEAD
   background-position: left center;
-=======
-  background-position: center center;
->>>>>>> 3e6a386146af628dfaa453ad26e85d6acdce5cce
   background-size: cover;
 }
 
@@ -30,16 +26,11 @@ body {
   position: absolute;
   top: 40%;
   left: 50%;
-<<<<<<< HEAD
-=======
-  animation: shadow-drop-lr 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
->>>>>>> 3e6a386146af628dfaa453ad26e85d6acdce5cce
 }
 .logo {
   display: flex;
   justify-content: flex-end;
 }
-<<<<<<< HEAD
 .logo img {
   width: 100%;
 }
@@ -54,21 +45,10 @@ body {
 .login {
   display: flex;
   gap: 1.3rem;
-=======
-.ibenlogo {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 6%;
-}
-.login {
-  display: flex;
-  gap: 2rem;
->>>>>>> 3e6a386146af628dfaa453ad26e85d6acdce5cce
   position: absolute;
   left: 50%;
   bottom: 0;
   transform: translate(-50%);
-<<<<<<< HEAD
   align-items: flex-end;
   justify-content: center;
 }
@@ -79,21 +59,12 @@ body {
 .login-icon {
   transform: translate(-50% -50%);
 }
-=======
-  background-image: url("/img/index/login-border.png");
-  width: 665px;
-  height: 180px;
-  align-items: flex-end;
-  justify-content: center;
-}
->>>>>>> 3e6a386146af628dfaa453ad26e85d6acdce5cce
 .eventdescription {
   display: flex;
   justify-content: flex-end;
 }
 
 .navbar {
-<<<<<<< HEAD
   width: 100%;
   display: flex;
   align-items: flex-start;
@@ -102,26 +73,6 @@ body {
 }
 .navbar .line-1 {
   margin-right: -1rem;
-=======
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
-  gap: 4rem;
-  margin-bottom: 2rem;
-}
-.navbar .button {
-  font-size: 1.3rem;
-  width: 180px;
-  height: 55px;
-  color: #3290ff;
-  border: 1.73067px solid #3290ff;
-  border-radius: 20.768px;
-  text-align: center;
-  line-height: 55px;
-}
-.navbar a {
-  text-decoration: none;
->>>>>>> 3e6a386146af628dfaa453ad26e85d6acdce5cce
 }
 
 .integral {
@@ -150,10 +101,6 @@ body {
   height: 100%;
   border: 1px solid #292922;
   border-radius: 10px;
-<<<<<<< HEAD
-=======
-  animation: shadow-drop-lr 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
->>>>>>> 3e6a386146af628dfaa453ad26e85d6acdce5cce
 }
 .page-2 {
   display: none;
@@ -172,11 +119,6 @@ body {
   flex-direction: column;
   justify-content: center;
   border: 1px solid #292929;
-<<<<<<< HEAD
-=======
-
-  animation: shadow-drop-lr 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
->>>>>>> 3e6a386146af628dfaa453ad26e85d6acdce5cce
 }
 
 form label {
@@ -197,10 +139,6 @@ form label {
 }
 .table {
   margin: auto;
-<<<<<<< HEAD
-=======
-  animation: shadow-drop-lr 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
->>>>>>> 3e6a386146af628dfaa453ad26e85d6acdce5cce
 }
 .table thead td {
   padding-right: 3rem;
@@ -217,7 +155,6 @@ form label {
 
 // Animation
 
-<<<<<<< HEAD
 //RWD
 
 @media screen and (max-width: 1920px) {
@@ -244,29 +181,4 @@ form label {
   }
 }
 @media screen and (max-width: 1280px) {
-=======
-@-webkit-keyframes shadow-drop-lr {
-  0% {
-    -webkit-box-shadow: 0 0 0 0 rgba(0, 0, 0, 0), 0 0 0 0 rgba(0, 0, 0, 0);
-    box-shadow: 0 0 0 0 rgba(0, 0, 0, 0), 0 0 0 0 rgba(0, 0, 0, 0);
-  }
-  100% {
-    -webkit-box-shadow: -12px 0 20px -12px rgba(0, 0, 0, 0.35),
-      12px 0 20px -12px rgba(0, 0, 0, 0.35);
-    box-shadow: -12px 0 20px -12px rgba(0, 0, 0, 0.35),
-      12px 0 20px -12px rgba(0, 0, 0, 0.35);
-  }
-}
-@keyframes shadow-drop-lr {
-  0% {
-    -webkit-box-shadow: 0 0 0 0 rgba(0, 0, 0, 0), 0 0 0 0 rgba(0, 0, 0, 0);
-    box-shadow: 0 0 0 0 rgba(0, 0, 0, 0), 0 0 0 0 rgba(0, 0, 0, 0);
-  }
-  100% {
-    -webkit-box-shadow: -12px 0 20px -12px rgba(0, 0, 0, 0.35),
-      12px 0 20px -12px rgba(0, 0, 0, 0.35);
-    box-shadow: -12px 0 20px -12px rgba(0, 0, 0, 0.35),
-      12px 0 20px -12px rgba(0, 0, 0, 0.35);
-  }
->>>>>>> 3e6a386146af628dfaa453ad26e85d6acdce5cce
 }
