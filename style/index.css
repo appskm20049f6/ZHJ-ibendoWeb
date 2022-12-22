@@ -11,7 +11,11 @@ body {
   background-image: url("/img/index/backgrond.png");
   background-color: #f0e6ce;
   background-repeat: no-repeat;
+<<<<<<< HEAD
+  background-position: left center;
+=======
   background-position: center center;
+>>>>>>> 3e6a386146af628dfaa453ad26e85d6acdce5cce
   background-size: cover;
 }
 
@@ -28,6 +32,11 @@ body {
   position: absolute;
   top: 40%;
   left: 50%;
+<<<<<<< HEAD
+=======
+  -webkit-animation: shadow-drop-lr 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+          animation: shadow-drop-lr 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+>>>>>>> 3e6a386146af628dfaa453ad26e85d6acdce5cce
 }
 
 .logo {
@@ -39,35 +48,52 @@ body {
           justify-content: flex-end;
 }
 
+<<<<<<< HEAD
+.logo img {
+  width: 100%;
+}
+
 .ibenlogo {
   width: 100%;
+=======
+.ibenlogo {
+>>>>>>> 3e6a386146af628dfaa453ad26e85d6acdce5cce
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  margin-bottom: 6%;
+<<<<<<< HEAD
 }
 
 .ibenlogo img {
   width: 50%;
+=======
+  margin-bottom: 6%;
+>>>>>>> 3e6a386146af628dfaa453ad26e85d6acdce5cce
 }
 
 .login {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+<<<<<<< HEAD
   gap: 1.3rem;
+=======
+  gap: 2rem;
+>>>>>>> 3e6a386146af628dfaa453ad26e85d6acdce5cce
   position: absolute;
   left: 50%;
   bottom: 0;
   -webkit-transform: translate(-50%);
           transform: translate(-50%);
+<<<<<<< HEAD
+=======
   background-image: url("/img/index/login-border.png");
-  background-repeat: no-repeat;
-  width: 35vw;
-  height: 17vh;
+  width: 665px;
+  height: 180px;
+>>>>>>> 3e6a386146af628dfaa453ad26e85d6acdce5cce
   -webkit-box-align: end;
       -ms-flex-align: end;
           align-items: flex-end;
@@ -76,10 +102,19 @@ body {
           justify-content: center;
 }
 
-.login img {
-  width: 90%;
+<<<<<<< HEAD
+.login-bg {
+  position: absolute;
+  z-index: -1;
 }
 
+.login-icon {
+  -webkit-transform: translate(-50% -50%);
+          transform: translate(-50% -50%);
+}
+
+=======
+>>>>>>> 3e6a386146af628dfaa453ad26e85d6acdce5cce
 .eventdescription {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -90,7 +125,10 @@ body {
 }
 
 .navbar {
+<<<<<<< HEAD
   width: 100%;
+=======
+>>>>>>> 3e6a386146af628dfaa453ad26e85d6acdce5cce
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -100,11 +138,31 @@ body {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
+<<<<<<< HEAD
   margin-bottom: 2rem;
 }
 
 .navbar .line-1 {
   margin-right: -1rem;
+=======
+  gap: 4rem;
+  margin-bottom: 2rem;
+}
+
+.navbar .button {
+  font-size: 1.3rem;
+  width: 180px;
+  height: 55px;
+  color: #3290ff;
+  border: 1.73067px solid #3290ff;
+  border-radius: 20.768px;
+  text-align: center;
+  line-height: 55px;
+}
+
+.navbar a {
+  text-decoration: none;
+>>>>>>> 3e6a386146af628dfaa453ad26e85d6acdce5cce
 }
 
 .integral {
@@ -137,6 +195,11 @@ body {
   height: 100%;
   border: 1px solid #292922;
   border-radius: 10px;
+<<<<<<< HEAD
+=======
+  -webkit-animation: shadow-drop-lr 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+          animation: shadow-drop-lr 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+>>>>>>> 3e6a386146af628dfaa453ad26e85d6acdce5cce
 }
 
 .page-2 {
@@ -162,6 +225,11 @@ body {
       -ms-flex-pack: center;
           justify-content: center;
   border: 1px solid #292929;
+<<<<<<< HEAD
+=======
+  -webkit-animation: shadow-drop-lr 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+          animation: shadow-drop-lr 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+>>>>>>> 3e6a386146af628dfaa453ad26e85d6acdce5cce
 }
 
 form label {
@@ -189,6 +257,11 @@ form label {
 
 .table {
   margin: auto;
+<<<<<<< HEAD
+=======
+  -webkit-animation: shadow-drop-lr 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+          animation: shadow-drop-lr 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+>>>>>>> 3e6a386146af628dfaa453ad26e85d6acdce5cce
 }
 
 .table thead td {
@@ -204,62 +277,48 @@ form label {
   background-color: #f9f9f9;
 }
 
-@media screen and (min-width: 1921px) and (max-width: 2560px) {
-  .login {
-    width: 26vw;
-    height: 12.5vh;
-  }
-  .login img {
-    width: 100%;
-  }
-}
-@media screen and (max-width: 1680px) {
-  .login {
-    width: 40vw;
-  }
-  .login img {
-    width: 100%;
-  }
-}
-@media screen and (max-width: 1440px) {
-  .login {
-    width: 50vw;
-  }
-  .login img {
-    width: 80%;
-  }
-}
+<<<<<<< HEAD
 @media screen and (max-width: 1366px) {
+  .logo {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: end;
+        -ms-flex-pack: end;
+            justify-content: flex-end;
+  }
+  .logo img {
+    width: 90%;
+  }
   .ibenlogo {
-    margin-bottom: 0;
-  }
-  .ibenlogo img {
-    width: 35%;
-  }
-  .login {
-    gap: 0.1rem;
-    width: 50vw;
-    background-position: center top;
-  }
-  .login img {
-    width: 65%;
-    margin-left: 10px;
-  }
-}
-@media screen and (max-width: 1280px) {
-  .ibenlogo {
-    margin-bottom: 0;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
   }
   .ibenlogo img {
     width: 40%;
+=======
+@-webkit-keyframes shadow-drop-lr {
+  0% {
+    -webkit-box-shadow: 0 0 0 0 rgba(0, 0, 0, 0), 0 0 0 0 rgba(0, 0, 0, 0);
+    box-shadow: 0 0 0 0 rgba(0, 0, 0, 0), 0 0 0 0 rgba(0, 0, 0, 0);
   }
-  .login {
-    gap: 0rem;
-    width: 70vw;
-    background-position: center top;
-    border-radius: 1rem;
+  100% {
+    -webkit-box-shadow: -12px 0 20px -12px rgba(0, 0, 0, 0.35), 12px 0 20px -12px rgba(0, 0, 0, 0.35);
+    box-shadow: -12px 0 20px -12px rgba(0, 0, 0, 0.35), 12px 0 20px -12px rgba(0, 0, 0, 0.35);
   }
-  .login img {
-    width: 55%;
+}
+@keyframes shadow-drop-lr {
+  0% {
+    -webkit-box-shadow: 0 0 0 0 rgba(0, 0, 0, 0), 0 0 0 0 rgba(0, 0, 0, 0);
+    box-shadow: 0 0 0 0 rgba(0, 0, 0, 0), 0 0 0 0 rgba(0, 0, 0, 0);
+  }
+  100% {
+    -webkit-box-shadow: -12px 0 20px -12px rgba(0, 0, 0, 0.35), 12px 0 20px -12px rgba(0, 0, 0, 0.35);
+    box-shadow: -12px 0 20px -12px rgba(0, 0, 0, 0.35), 12px 0 20px -12px rgba(0, 0, 0, 0.35);
+>>>>>>> 3e6a386146af628dfaa453ad26e85d6acdce5cce
   }
 }/*# sourceMappingURL=index.css.map */
