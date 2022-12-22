@@ -2,7 +2,7 @@
   margin: 0;
   padding: 0;
   -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 body {
@@ -44,8 +44,8 @@ body {
   display: -ms-flexbox;
   display: flex;
   -webkit-box-pack: end;
-      -ms-flex-pack: end;
-          justify-content: flex-end;
+  -ms-flex-pack: end;
+  justify-content: flex-end;
 }
 
 <<<<<<< HEAD
@@ -62,9 +62,14 @@ body {
   display: -ms-flexbox;
   display: flex;
   -webkit-box-pack: center;
+<<<<<<< Updated upstream
       -ms-flex-pack: center;
           justify-content: center;
 <<<<<<< HEAD
+=======
+  -ms-flex-pack: center;
+  justify-content: center;
+>>>>>>> Stashed changes
 }
 
 .ibenlogo img {
@@ -87,6 +92,7 @@ body {
   left: 50%;
   bottom: 0;
   -webkit-transform: translate(-50%);
+<<<<<<< Updated upstream
           transform: translate(-50%);
 <<<<<<< HEAD
 =======
@@ -94,12 +100,15 @@ body {
   width: 665px;
   height: 180px;
 >>>>>>> 3e6a386146af628dfaa453ad26e85d6acdce5cce
+=======
+  transform: translate(-50%);
+>>>>>>> Stashed changes
   -webkit-box-align: end;
-      -ms-flex-align: end;
-          align-items: flex-end;
+  -ms-flex-align: end;
+  align-items: flex-end;
   -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
 }
 
 <<<<<<< HEAD
@@ -110,7 +119,7 @@ body {
 
 .login-icon {
   -webkit-transform: translate(-50% -50%);
-          transform: translate(-50% -50%);
+  transform: translate(-50% -50%);
 }
 
 =======
@@ -120,8 +129,8 @@ body {
   display: -ms-flexbox;
   display: flex;
   -webkit-box-pack: end;
-      -ms-flex-pack: end;
-          justify-content: flex-end;
+  -ms-flex-pack: end;
+  justify-content: flex-end;
 }
 
 .navbar {
@@ -133,12 +142,17 @@ body {
   display: -ms-flexbox;
   display: flex;
   -webkit-box-align: start;
-      -ms-flex-align: start;
-          align-items: flex-start;
+  -ms-flex-align: start;
+  align-items: flex-start;
   -webkit-box-pack: center;
+<<<<<<< Updated upstream
       -ms-flex-pack: center;
           justify-content: center;
 <<<<<<< HEAD
+=======
+  -ms-flex-pack: center;
+  justify-content: center;
+>>>>>>> Stashed changes
   margin-bottom: 2rem;
 }
 
@@ -184,8 +198,8 @@ body {
   display: -ms-flexbox;
   display: flex;
   -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
   gap: 3rem;
   margin-bottom: 3rem;
 }
@@ -219,11 +233,11 @@ body {
   display: flex;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
   -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
   border: 1px solid #292929;
 <<<<<<< HEAD
 =======
@@ -246,7 +260,7 @@ form label {
   display: -ms-flexbox;
   display: flex;
   -ms-flex-pack: distribute;
-      justify-content: space-around;
+  justify-content: space-around;
 }
 
 .page-3 {
@@ -284,20 +298,23 @@ form label {
     display: -ms-flexbox;
     display: flex;
     -webkit-box-pack: end;
-        -ms-flex-pack: end;
-            justify-content: flex-end;
+    -ms-flex-pack: end;
+    justify-content: flex-end;
   }
+
   .logo img {
     width: 90%;
   }
+
   .ibenlogo {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
     -webkit-box-pack: center;
-        -ms-flex-pack: center;
-            justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
   }
+
   .ibenlogo img {
     width: 40%;
 =======
@@ -321,4 +338,6 @@ form label {
     box-shadow: -12px 0 20px -12px rgba(0, 0, 0, 0.35), 12px 0 20px -12px rgba(0, 0, 0, 0.35);
 >>>>>>> 3e6a386146af628dfaa453ad26e85d6acdce5cce
   }
-}/*# sourceMappingURL=index.css.map */
+}
+
+/*# sourceMappingURL=index.css.map */
