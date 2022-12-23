@@ -1,0 +1,32 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+body {
+  height: 100vh;
+  width: 100vw;
+}
+.page-1 {
+  width: 100%;
+  height: 100%;
+  background-image: url("/img/mobile-backgrond.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+main {
+  height: 100%;
+}
+.left {
+  display: none;
+}
+.right {
+  display: none;
+}
+.middle {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-end;
+}

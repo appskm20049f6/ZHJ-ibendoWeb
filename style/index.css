@@ -56,6 +56,10 @@ main {
           align-items: center;
 }
 
+.mobile-logo {
+  display: none;
+}
+
 .ibendo-logo {
   height: 40%;
 }
