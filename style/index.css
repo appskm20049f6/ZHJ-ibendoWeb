@@ -155,4 +155,66 @@ main {
   .login img {
     width: 100%;
   }
+}
+@media screen and (max-width: 834px) {
+  .left {
+    display: none;
+  }
+  .right {
+    display: none;
+  }
+  .page-1 {
+    background-image: url("/img/mobile-backgrond.png");
+  }
+  .middle {
+    width: 100%;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    height: 100%;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+    -webkit-box-align: end;
+        -ms-flex-align: end;
+            align-items: flex-end;
+  }
+  .mobile-logo {
+    display: block;
+    width: 100%;
+  }
+  .ibendo-logo {
+    margin-top: 10%;
+    height: 75%;
+  }
+  .ibendo-button {
+    width: 100%;
+    display: none;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+  }
+  .mobile-logo-a {
+    width: 40%;
+  }
+  .tree {
+    width: 30%;
+  }
+}
+@media screen and (max-width: 414px) {
+  .ibendo-logo {
+    margin-top: 45%;
+    height: 30%;
+  }
+  .login {
+    background-position: 50% 48%;
+    background-size: 75%;
+  }
+  .login a {
+    width: 13%;
+  }
 }/*# sourceMappingURL=index.css.map */
