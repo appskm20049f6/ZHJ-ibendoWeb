@@ -18,7 +18,7 @@
     >
     <meta
         property="og:title"
-        content="指劍購物趣"
+        content="Facebook分享的時候會顯示的title"
     />
     <meta
         property="og:description"
@@ -40,6 +40,11 @@
 
     <!--Icon-->
     <link
+        rel="shortcut icon"
+        type="image/png"
+        href="ico.png"
+    />
+    <link
         rel="image_src"
         href="images/fb.jpg"
     />
@@ -56,130 +61,21 @@
     >
     <link
         rel="stylesheet"
-        href="/style/index.css"
-    />
-
-
+        href="./style/style.css"
+    >
 </head>
 
-<body onload="ready()">
-
-    <div
-        class="loader"
-        id="loader"
-    ></div>
-
-    <div
-        class="page-1"
-        id="page-1"
-    >
-        <main>
-            <div class="left">
-                <img
-                    src="/img/backgrond-pepple.png"
-                    alt=""
-                >
-            </div>
-            <div class="middle">
-                <a
-                    href=""
-                    class="mobile-logo-a"
-                >
-                    <img
-                        src="/img/logo.png"
-                        alt=""
-                        class="mobile-logo mobile-logo-logo"
-                    >
-                </a>
-                <div class="ibendo-logo">
-                    <img
-                        src="/img/ibendo-logo.png"
-                        alt=""
-                    >
-                </div>
-                <div
-                    class="login"
-                    id="login"
-                >
-                    <a href="javaScript:login()"><img
-                            src="/img/apple.png"
-                            alt=""
-                            class="login-logo"
-                        >
-                    </a>
-                    <a href=""><img
-                            src="/img/google.png"
-                            alt=""
-                            class="login-logo"
-                        >
-                    </a>
-                    <a href=""><img
-                            src="/img/facebook.png"
-                            alt=""
-                            class="login-logo"
-                        >
-                    </a>
-                    <a href=""><img
-                            src="/img/GFlogo.png"
-                            alt=""
-                            class="login-logo"
-                        >
-                    </a>
-
-                </div>
-                <div
-                    class="ibendo-button"
-                    id="ibendo-button"
-                >
-                    <a href=""><img
-                            src="/img/bones.png"
-                            alt=""
-                            class=""
-                        ></a><img
-                        src="/img/line.png"
-                        alt=""
-                        class="line"
-                    ><a href=""><img
-                            src="/img/addides.png"
-                            alt=""
-                            class=""
-                        ></a><img
-                        src="/img/line.png"
-                        alt=""
-                        class="line"
-                    ><a href=""><img
-                            src="/img/log.png"
-                            alt=""
-                            class=""
-                        ></a>
-                </div>
-                <img
-                    src="/img/backgrond-tree.png"
-                    alt=""
-                    class="mobile-logo tree"
-                >
-            </div>
-            <div class="right">
-                <div class="logo">
-                    <a href="">
-                        <img
-                            src="/img/logo.png"
-                            alt=""
-                        >
-                    </a>
-
-                    <img
-                        src="/img/backgrond-tree.png"
-                        alt=""
-                    >
-                </div>
-            </div>
-        </main>
-
-    </div>
-
+<body>
+    <!-- 活動說明光箱 -->
+    <div class="lightbox"></div>
+    <!-- 登入頁面 -->
+    <div class="login"></div>
+    <!-- 獎勵兌換 -->
+    <div class="bonus"></div>
+    <!-- 寄送資料 -->
+    <div class="address"></div>
+    <!-- 兌換紀錄查詢 -->
+    <div class="log"></div>
 </body>
-
-<script src="/js/index.js"></script>
 
 </html>
