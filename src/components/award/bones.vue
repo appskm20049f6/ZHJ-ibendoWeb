@@ -87,7 +87,6 @@
 .integral {
   color: #f9f7f2;
   position: relative;
-  margin-top: -3%;
   width: 20%;
   display: flex;
   p {

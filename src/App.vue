@@ -4,6 +4,7 @@
   <div class="phonelogin"><phonelogin /></div>
   <div class="award"><award /></div>
   <div class="bones"><bones /></div>
+  <div class="addides"><addides /></div>
 </template>
 
 <script setup>
@@ -12,6 +13,7 @@ import login from "./components/login.vue";
 import phonelogin from "./components/phonelogin.vue";
 import award from "./components/award.vue";
 import bones from "./components/award/bones.vue";
+import addides from "./components/award/addides.vue";
 </script>
 
 <style scoped lang="scss">
@@ -32,13 +34,18 @@ import bones from "./components/award/bones.vue";
   align-items: center;
 }
 .award {
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 .bones {
-  display: flex;
+  display: none;
   justify-content: center;
   align-items: flex-start;
+}
+.addides {
+  display: flex;
+  flex-direction: row;
 }
 </style>

@@ -14,5 +14,16 @@
 <style lang="scss" scoped>
 .line {
   margin-right: -1%;
+  margin-left: -1%;
+}
+.awardbotton {
+  display: flex;
+  width: 45%;
+  a {
+    width: 100%;
+    img {
+      width: 100%;
+    }
+  }
 }
 </style>
