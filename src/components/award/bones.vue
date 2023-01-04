@@ -14,6 +14,70 @@
           <p>剩餘數量:XXXX</p>
         </div>
       </div>
+      <div class="bones-card">
+        <img src="../../../public/img/bones-cardbg.png" alt="" />
+        <div class="bonescheck">
+          <p>獎項名稱獎項名稱獎項名稱</p>
+          <p>積分:XXXX</p>
+          <p>剩餘數量:XXXX</p>
+        </div>
+      </div>
+      <div class="bones-card">
+        <img src="../../../public/img/bones-cardbg.png" alt="" />
+        <div class="bonescheck">
+          <p>獎項名稱獎項名稱獎項名稱</p>
+          <p>積分:XXXX</p>
+          <p>剩餘數量:XXXX</p>
+        </div>
+      </div>
+      <div class="bones-card">
+        <img src="../../../public/img/bones-cardbg.png" alt="" />
+        <div class="bonescheck">
+          <p>獎項名稱獎項名稱獎項名稱</p>
+          <p>積分:XXXX</p>
+          <p>剩餘數量:XXXX</p>
+        </div>
+      </div>
+      <div class="bones-card">
+        <img src="../../../public/img/bones-cardbg.png" alt="" />
+        <div class="bonescheck">
+          <p>獎項名稱獎項名稱獎項名稱</p>
+          <p>積分:XXXX</p>
+          <p>剩餘數量:XXXX</p>
+        </div>
+      </div>
+      <div class="bones-card">
+        <img src="../../../public/img/bones-cardbg.png" alt="" />
+        <div class="bonescheck">
+          <p>獎項名稱獎項名稱獎項名稱</p>
+          <p>積分:XXXX</p>
+          <p>剩餘數量:XXXX</p>
+        </div>
+      </div>
+      <div class="bones-card">
+        <img src="../../../public/img/bones-cardbg.png" alt="" />
+        <div class="bonescheck">
+          <p>獎項名稱獎項名稱獎項名稱</p>
+          <p>積分:XXXX</p>
+          <p>剩餘數量:XXXX</p>
+        </div>
+      </div>
+      <div class="bones-card">
+        <img src="../../../public/img/bones-cardbg.png" alt="" />
+        <div class="bonescheck">
+          <p>獎項名稱獎項名稱獎項名稱</p>
+          <p>積分:XXXX</p>
+          <p>剩餘數量:XXXX</p>
+        </div>
+      </div>
+      <div class="bones-card">
+        <img src="../../../public/img/bones-cardbg.png" alt="" />
+        <div class="bonescheck">
+          <p>獎項名稱獎項名稱獎項名稱</p>
+          <p>積分:XXXX</p>
+          <p>剩餘數量:XXXX</p>
+        </div>
+      </div>
     </div>
   </div>
 </template>
