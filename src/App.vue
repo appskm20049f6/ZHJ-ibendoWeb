@@ -5,6 +5,8 @@
   <div class="award"><award /></div>
   <div class="bones"><bones /></div>
   <div class="addides"><addides /></div>
+  <div class="addidesIDcard"><addidesIDcard /></div>
+  <div class="boneslog"><boneslog /></div>
 </template>
 
 <script setup>
@@ -14,6 +16,8 @@ import phonelogin from "./components/phonelogin.vue";
 import award from "./components/award.vue";
 import bones from "./components/award/bones.vue";
 import addides from "./components/award/addides.vue";
+import addidesIDcard from "./components/award/addidesIDcard.vue";
+import boneslog from "./components/award/boneslog.vue";
 </script>
 
 <style scoped lang="scss">
@@ -45,7 +49,15 @@ import addides from "./components/award/addides.vue";
   align-items: flex-start;
 }
 .addides {
-  display: flex;
+  display: none;
   flex-direction: row;
+}
+.addidesIDcard {
+  display: none;
+}
+.boneslog {
+  display: none;
+  align-items: center;
+  justify-content: center;
 }
 </style>

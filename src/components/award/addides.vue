@@ -47,53 +47,21 @@
         <p>否</p>
         <input type="radio" name="years" value="No" checked v-model="years" />
       </label>
-      <input type="submit" value="確認/修改" class="button" v-on:click="post" />
+      <input type="submit" value="確認/修改" class="button" />
     </form>
   </div>
 </template>
 
 <script setup>
-// const name = 333;
-// const phoneNumber = 555;
-// const email = "";
-// const postalcode = "";
-// const addides = "";
-// const years = "";
-
-// const post = {
-//   data() {
-//     return {
-//       name: "",
-//       phoneNumber: "",
-//       email: "",
-//       postalcode: "",
-//       addides: "",
-//       years: "",
-//     };
-//   },
-//   mounted() {
-//     axios({
-//       method: "post",
-//       url: "https://script.google.com/macros/s/AKfycbyrK-IUynAhdOtcFcJPzTlul3-lfbqG01q-adOYwwhDqrTVCX44-EUS3P7nX_GLdpcL/exec",
-//       "Content-Type": "application/json",
-//       data: "name=" + name,
-//     })
-//       .then((response) => console.log(response))
-//       .catch((error) => console.log(error));
-//   },
-
-// };
-let addides = "台南";
-
-axios({
-  method: "post",
-  url: "https://script.google.com/macros/s/AKfycbyrK-IUynAhdOtcFcJPzTlul3-lfbqG01q-adOYwwhDqrTVCX44-EUS3P7nX_GLdpcL/exec",
-  data: `name='Nelison&phoneNumber='0929193492&email='233@gmail.com&postalcode='708&addides='たか&years='yes`,
-})
-  .then((response) => {
-    console.log(response);
-  })
-  .catch((error) => console.log(error));
+// axios({
+//   method: "post",
+//   url: "https://script.google.com/macros/s/AKfycbyrK-IUynAhdOtcFcJPzTlul3-lfbqG01q-adOYwwhDqrTVCX44-EUS3P7nX_GLdpcL/exec",
+//   data: `name='Nelison&phoneNumber='0929193492&email='233@gmail.com&postalcode='708&addides='たか&years='yes`,
+// })
+//   .then((response) => {
+//     console.log(response);
+//   })
+//   .catch((error) => console.log(error));
 </script>
 <style lang="scss" scoped>
 .addidesbg {
