@@ -1,16 +1,24 @@
 <template>
   <div class="awardbotton">
-    <a href=""><img class="line" src="../../public/img/bones.png" alt="" /></a>
+    <a @click="changeibendo(1)"
+      ><img class="line" src="../../public/img/bones.png" alt=""
+    /></a>
     <img class="line" src="../../public/img/line.png" alt="" />
-    <a href=""
+    <a @click="changeibendo(2)"
       ><img class="line" src="../../public/img/addides.png" alt=""
     /></a>
     <img class="line" src="../../public/img/line.png" alt="" />
-    <a href=""><img class="line" src="../../public/img/log.png" alt="" /></a>
+    <a @click="changeibendo(3)"
+      ><img class="line" src="../../public/img/log.png" alt=""
+    /></a>
   </div>
 </template>
 
-<script setup></script>
+<script setup>
+const changeibendo = (e) => {
+  console.log(`測試按鈕${e}`);
+};
+</script>
 <style lang="scss" scoped>
 .line {
   margin-right: -1%;
