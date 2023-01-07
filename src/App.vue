@@ -56,7 +56,7 @@ import boneslog from "./components/award/boneslog.vue";
   display: none;
 }
 .boneslog {
-  display: none;
+  display: flex;
   align-items: center;
   justify-content: center;
 }
