@@ -10,12 +10,23 @@
       <a href=""><img src="../../public/img/apple.png" alt="" /></a>
       <a href=""><img src="../../public/img/google.png" alt="" /></a>
       <a href=""><img src="../../public/img/facebook.png" alt="" /></a>
-      <a href=""><img src="../../public/img/GFlogo.png" alt="" /></a>
+      <a v-on:click="changeDiv = 2"
+        ><img src="../../public/img/GFlogo.png" alt=""
+      /></a>
     </div>
   </div>
 </template>
 
-<script setup></script>
+<script setup>
+let changeDiv;
+defineProps({
+  changeDiv: {
+    su: 1,
+  },
+});
+
+console.log("log:" + changeDiv);
+</script>
 <style lang="scss" scoped>
 .login {
   position: relative;

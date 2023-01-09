@@ -6,11 +6,18 @@
   </div>
 </template>
 
-<script setup></script>
+<script setup>
+import { ref } from "@vue/reactivity";
+</script>
 <style lang="scss" scoped>
 .logo {
   display: flex;
   flex-direction: column;
   align-items: center;
+  a {
+    img {
+      width: 100%;
+    }
+  }
 }
 </style>

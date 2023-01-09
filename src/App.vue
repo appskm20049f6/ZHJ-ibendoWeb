@@ -1,12 +1,13 @@
 <template>
-  <div class="logo"><logo /></div>
-  <div class="login"><login /></div>
-  <div class="phonelogin"><phonelogin /></div>
-  <div class="award"><award /></div>
-  <div class="bones"><bones /></div>
-  <div class="addides"><addides /></div>
-  <div class="addidesIDcard"><addidesIDcard /></div>
-  <div class="boneslog"><boneslog /></div>
+  <div class="logo"><logo></logo></div>
+
+  <div class="login" v-if="Div == 1">
+    <login></login>
+  </div>
+
+  <div class="phonelogin" v-if="Div == 2">
+    <phonelogin></phonelogin>
+  </div>
 </template>
 
 <script setup>
@@ -18,6 +19,13 @@ import bones from "./components/award/bones.vue";
 import addides from "./components/award/addides.vue";
 import addidesIDcard from "./components/award/addidesIDcard.vue";
 import boneslog from "./components/award/boneslog.vue";
+
+import { ref } from "@vue/reactivity";
+sessionStorage.setItem("GameID", 1);
+
+const getItem = sessionStorage.getItem("GameID");
+
+let Div = ref(getItem);
 </script>
 
 <style scoped lang="scss">
@@ -27,33 +35,33 @@ import boneslog from "./components/award/boneslog.vue";
 }
 
 .login {
-  display: none;
+  display: flex;
   flex-direction: column;
 }
 .phonelogin {
-  display: none;
+  display: flex;
   justify-content: center;
   margin: auto;
   flex-direction: column;
   align-items: center;
 }
 .award {
-  width: 100%;
   display: flex;
+  width: 100%;
   justify-content: center;
   align-items: center;
 }
 .bones {
-  display: none;
+  display: flex;
   justify-content: center;
   align-items: flex-start;
 }
 .addides {
-  display: none;
+  display: flex;
   flex-direction: row;
 }
 .addidesIDcard {
-  display: none;
+  display: flex;
 }
 .boneslog {
   display: flex;
