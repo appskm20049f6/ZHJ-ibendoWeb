@@ -20,8 +20,71 @@
         <p>33688</p>
       </div>
       <div class="bonesbg">
-        <img src="../../../public/img/bones-bg.png" alt="" />
         <div class="bones-card-row">
+          <div class="bones-card">
+            <img src="../../../public/img/bones-cardbg.png" alt="" />
+            <div class="bonescheck">
+              <p>獎項名稱獎項名稱獎項名稱</p>
+              <p>積分:XXXX</p>
+              <p>剩餘數量:XXXX</p>
+            </div>
+          </div>
+          <div class="bones-card">
+            <img src="../../../public/img/bones-cardbg.png" alt="" />
+            <div class="bonescheck">
+              <p>獎項名稱獎項名稱獎項名稱</p>
+              <p>積分:XXXX</p>
+              <p>剩餘數量:XXXX</p>
+            </div>
+          </div>
+          <div class="bones-card">
+            <img src="../../../public/img/bones-cardbg.png" alt="" />
+            <div class="bonescheck">
+              <p>獎項名稱獎項名稱獎項名稱</p>
+              <p>積分:XXXX</p>
+              <p>剩餘數量:XXXX</p>
+            </div>
+          </div>
+          <div class="bones-card">
+            <img src="../../../public/img/bones-cardbg.png" alt="" />
+            <div class="bonescheck">
+              <p>獎項名稱獎項名稱獎項名稱</p>
+              <p>積分:XXXX</p>
+              <p>剩餘數量:XXXX</p>
+            </div>
+          </div>
+          <div class="bones-card">
+            <img src="../../../public/img/bones-cardbg.png" alt="" />
+            <div class="bonescheck">
+              <p>獎項名稱獎項名稱獎項名稱</p>
+              <p>積分:XXXX</p>
+              <p>剩餘數量:XXXX</p>
+            </div>
+          </div>
+          <div class="bones-card">
+            <img src="../../../public/img/bones-cardbg.png" alt="" />
+            <div class="bonescheck">
+              <p>獎項名稱獎項名稱獎項名稱</p>
+              <p>積分:XXXX</p>
+              <p>剩餘數量:XXXX</p>
+            </div>
+          </div>
+          <div class="bones-card">
+            <img src="../../../public/img/bones-cardbg.png" alt="" />
+            <div class="bonescheck">
+              <p>獎項名稱獎項名稱獎項名稱</p>
+              <p>積分:XXXX</p>
+              <p>剩餘數量:XXXX</p>
+            </div>
+          </div>
+          <div class="bones-card">
+            <img src="../../../public/img/bones-cardbg.png" alt="" />
+            <div class="bonescheck">
+              <p>獎項名稱獎項名稱獎項名稱</p>
+              <p>積分:XXXX</p>
+              <p>剩餘數量:XXXX</p>
+            </div>
+          </div>
           <div class="bones-card">
             <img src="../../../public/img/bones-cardbg.png" alt="" />
             <div class="bonescheck">
@@ -137,6 +200,40 @@ let bonesPage = ref(1);
 let changeibendo = (e) => {
   bonesPage.value = e;
 };
+
+let zhjgamdID = {
+  gameid: localStorage.getItem("gameId"),
+};
+
+axios({
+  method: "POST",
+  url: "https://zhj.gameflier.com/service/BonusReward/api/GetExchange",
+  headers: {
+    "Access-Control-Allow-Origin": "*",
+    "Content-Type": "application/json",
+  },
+  data: zhjgamdID,
+})
+  .then((response) => {
+    console.log(response);
+  })
+  .catch((error) => {
+    axios({
+      method: "POST",
+      baseURL: "http://localhost:3000/BonusReward",
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+        "Content-Type": "application/json",
+      },
+      data: localStorage.getItem("gameId"),
+    })
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  });
 </script>
 <style lang="scss" scoped>
 .award {
@@ -151,7 +248,7 @@ let changeibendo = (e) => {
 }
 .awardbotton {
   display: flex;
-  width: 45%;
+  width: 40%;
   a {
     width: 100%;
     img {
@@ -160,19 +257,24 @@ let changeibendo = (e) => {
   }
 }
 .integral {
+  width: 20%;
   color: #f9f7f2;
   position: relative;
-  width: 20%;
   display: flex;
   p {
-    top: 50%;
-    left: 40%;
+    transform: translate(-50%, -50%);
+    top: 60%;
+    left: 50%;
     position: absolute;
+  }
+  img {
+    width: 100%;
   }
 }
 .bonesbg {
+  flex-grow: 9;
   display: flex;
-  width: 60%;
+  width: 100%;
   flex-direction: column;
 }
 .bones-card-row {
@@ -199,6 +301,7 @@ let changeibendo = (e) => {
   }
 }
 .reward-bones {
+  width: 70%;
   display: flex;
   flex-direction: row;
   align-items: flex-start;

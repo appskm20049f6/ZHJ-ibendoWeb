@@ -7,9 +7,11 @@
       <img src="../../public/img/login-backgrond.png" alt="" />
     </div>
     <div class="loginicon">
-      <a href=""><img src="../../public/img/apple.png" alt="" /></a>
-      <a href=""><img src="../../public/img/google.png" alt="" /></a>
-      <a href=""><img src="../../public/img/facebook.png" alt="" /></a>
+      <a @click="login(1)"><img src="../../public/img/apple.png" alt="" /></a>
+      <a @click="login(2)"><img src="../../public/img/google.png" alt="" /></a>
+      <a @click="login(3)"
+        ><img src="../../public/img/facebook.png" alt=""
+      /></a>
       <a @click="loginTypeChange(2)"
         ><img src="../../public/img/GFlogo.png" alt=""
       /></a>
@@ -18,46 +20,138 @@
   <div class="phone-login" v-if="loginType === 2">
     <img src="../../public/img/phone-login.png" alt="" />
     <div class="login-input">
-      <form action="" method="get">
+      <div class="phonelog">
         <div class="login-phone">
-          <select>
-            <option selected value="+886">請選擇</option>
-            <option value="+886">+886</option>
-            <option value="+852">+852</option>
-            <option value="+853">+853</option>
-            <option value="+86">+86</option>
+          <select v-model="phoneTop">
+            <option value="886" selected>+886</option>
+            <option value="852">+852</option>
+            <option value="853">+853</option>
+            <option value="86">+86</option>
           </select>
-          <input type="" placeholder="請輸入電話號碼" />
+          <input type="" v-model="phoneNumber" placeholder="請輸入電話號碼" />
         </div>
 
         <div class="login-password">
-          <input type="password" placeholder="請輸入密碼" />
+          <input
+            v-model="typePassword"
+            type="password"
+            placeholder="請輸入密碼"
+          />
         </div>
-        <button>確認</button>
-      </form>
+        <button @click="phonelogin()">確認</button>
+      </div>
     </div>
   </div>
 </template>
 
 <script setup>
 import { ref } from "@vue/reactivity";
+let phoneTop = ref("");
+let phoneNumber = ref("");
+let typePassword = ref("");
 let loginType = ref(1);
 
 const loginTypeChange = (e) => {
   loginType.value = e;
-  console.log(loginType.value);
+};
+
+let login = (e) => {
+  axios({
+    method: "GET",
+    url: "https://zhj.gameflier.com/service/BonusReward/api/GetOauthCallback",
+  })
+    .then((response) => {
+      if (e == 1) {
+        window.location.href = response.data.Data.appleLink;
+      }
+      if (e == 2) {
+        window.location.href = response.data.Data.googleLink;
+      }
+      if (e == 3) {
+        window.location.href = response.data.Data.facebookLink;
+      }
+    })
+    .catch((error) => {
+      axios({
+        method: "get",
+        baseURL: "http://localhost:3000/zhj3men",
+      })
+        .then((response) => {
+          if (e == 1) {
+            window.location.href = response.data.Data.appleLink;
+          }
+          if (e == 2) {
+            window.location.href = response.data.Data.googleLink;
+          }
+          if (e == 3) {
+            window.location.href = response.data.Data.facebookLink;
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    });
+};
+
+let phonelogin = (e) => {
+  let logindata = {
+    game: "zhj",
+    phone: phoneTop.value + phoneNumber.value.replace(/^0+/, ""),
+    password: typePassword.value,
+  };
+  console.log(logindata);
+
+  axios({
+    method: "POST",
+    url: "https://zhj.gameflier.com/service/BonusReward/api/LoginByPassword",
+    headers: {
+      "Access-Control-Allow-Origin": "*",
+      "Content-Type": "application/json",
+    },
+    data: logindata,
+  })
+    .then((response) => {
+      console.log(response);
+      localStorage.setItem("gameId", response.data.Data.GameId);
+      window.location.reload();
+    })
+    .catch((error) => {
+      axios({
+        method: "POST",
+        baseURL: "http://localhost:3000/zhjphoneLogin",
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+          "Content-Type": "application/json",
+        },
+        data: logindata,
+      })
+        .then((response) => {
+          console.log(response);
+          localStorage.setItem("gameId", response.data.Data.GameId);
+          window.location.reload();
+        })
+        .catch((error) => {
+          alert("帳號密碼輸入錯誤請重新確認。");
+          console.log(error);
+        });
+    });
 };
 </script>
 <style lang="scss" scoped>
 .login {
+  width: 100%;
   position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 .ibendologo {
+  width: 100%;
   display: flex;
   justify-content: center;
+  img {
+    width: 40%;
+  }
 }
 .loginicon {
   top: 30%;
@@ -74,7 +168,7 @@ const loginTypeChange = (e) => {
 }
 .login-input {
   position: absolute;
-  form {
+  .phonelog {
     flex-direction: column;
     align-items: flex-end;
     display: flex;
