@@ -1,5 +1,5 @@
 <template>
-  <div class="table">
+  <div class="bonesLog">
     <table>
       <tr>
         <th>時間</th>
@@ -55,7 +55,7 @@
 
 <script setup></script>
 <style lang="scss" scoped>
-.table {
+.bonesLog {
   width: 70%;
   height: 70%;
   display: flex;

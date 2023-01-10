@@ -4,6 +4,8 @@
   <div class="login" v-if="Div == 1">
     <login></login>
   </div>
+
+  <div class=".awardDiv" v-if="Div == 2"><award></award></div>
 </template>
 
 <script setup>
@@ -16,11 +18,11 @@ import addidesIDcard from "./components/award/addidesIDcard.vue";
 import boneslog from "./components/award/boneslog.vue";
 
 import { ref } from "@vue/reactivity";
+
+const Div = 2;
+
 sessionStorage.setItem("GameID", 1);
-
-const getItem = sessionStorage.getItem("GameID");
-
-let Div = ref(getItem);
+const getGameID = sessionStorage.getItem("GameID");
 </script>
 
 <style scoped lang="scss">
@@ -39,28 +41,5 @@ let Div = ref(getItem);
   margin: auto;
   flex-direction: column;
   align-items: center;
-}
-.award {
-  display: flex;
-  width: 100%;
-  justify-content: center;
-  align-items: center;
-}
-.bones {
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-}
-.addides {
-  display: flex;
-  flex-direction: row;
-}
-.addidesIDcard {
-  display: flex;
-}
-.boneslog {
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 </style>
