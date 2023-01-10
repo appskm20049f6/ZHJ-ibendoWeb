@@ -4,16 +4,11 @@
   <div class="login" v-if="Div == 1">
     <login></login>
   </div>
-
-  <div class="phonelogin" v-if="Div == 2">
-    <phonelogin></phonelogin>
-  </div>
 </template>
 
 <script setup>
 import logo from "./components/logo.vue";
 import login from "./components/login.vue";
-import phonelogin from "./components/phonelogin.vue";
 import award from "./components/award.vue";
 import bones from "./components/award/bones.vue";
 import addides from "./components/award/addides.vue";
