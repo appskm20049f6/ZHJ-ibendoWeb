@@ -7,7 +7,6 @@
       <a href=""
         ><img src="../../public/img/setsume.png" class="setume" alt=""
       /></a>
-      <img src="../../public/img/line.png" alt="" />
       <a @click="logOut()"
         ><img
           src="../../public/img/ibendo-loginlogout.png"
@@ -28,17 +27,23 @@ let logOut = () => {
 </script>
 <style lang="scss" scoped>
 .loginlogout {
-  margin-right: 5%;
+  margin-right: 10%;
+  display: flex;
+  width: 100%;
+  align-items: center;
   a {
     margin-left: -3%;
     margin-right: -3%;
+  }
+  > img {
+    position: absolute;
   }
 }
 .logo {
   width: 20%;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-end;
   @media (max-width: 1366px) {
     width: 15%;
   }
@@ -55,8 +60,5 @@ let logOut = () => {
       width: 100%;
     }
   }
-}
-.loginlogout {
-  display: flex;
 }
 </style>

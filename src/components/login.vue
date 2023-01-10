@@ -111,7 +111,6 @@ let phonelogin = (e) => {
     data: logindata,
   })
     .then((response) => {
-      console.log(response);
       localStorage.setItem("gameId", response.data.Data.GameId);
       window.location.reload();
     })
@@ -126,13 +125,11 @@ let phonelogin = (e) => {
         data: logindata,
       })
         .then((response) => {
-          console.log(response);
           localStorage.setItem("gameId", response.data.Data.GameId);
           window.location.reload();
         })
         .catch((error) => {
           alert("帳號密碼輸入錯誤請重新確認。");
-          console.log(error);
         });
     });
 };

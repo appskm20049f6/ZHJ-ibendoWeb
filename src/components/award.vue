@@ -17,83 +17,10 @@
     <div class="reward-bones" v-if="bonesPage == 1">
       <div class="integral">
         <img src="../../../public/img/integral-bg.png" alt="" />
-        <p>33688</p>
+        <p>33563</p>
       </div>
       <div class="bonesbg">
-        <div class="bones-card-row">
-          <div class="bones-card">
-            <img src="../../../public/img/bones-cardbg.png" alt="" />
-            <div class="bonescheck">
-              <p>獎項名稱獎項名稱獎項名稱</p>
-              <p>積分:XXXX</p>
-              <p>剩餘數量:XXXX</p>
-            </div>
-          </div>
-          <div class="bones-card">
-            <img src="../../../public/img/bones-cardbg.png" alt="" />
-            <div class="bonescheck">
-              <p>獎項名稱獎項名稱獎項名稱</p>
-              <p>積分:XXXX</p>
-              <p>剩餘數量:XXXX</p>
-            </div>
-          </div>
-          <div class="bones-card">
-            <img src="../../../public/img/bones-cardbg.png" alt="" />
-            <div class="bonescheck">
-              <p>獎項名稱獎項名稱獎項名稱</p>
-              <p>積分:XXXX</p>
-              <p>剩餘數量:XXXX</p>
-            </div>
-          </div>
-          <div class="bones-card">
-            <img src="../../../public/img/bones-cardbg.png" alt="" />
-            <div class="bonescheck">
-              <p>獎項名稱獎項名稱獎項名稱</p>
-              <p>積分:XXXX</p>
-              <p>剩餘數量:XXXX</p>
-            </div>
-          </div>
-          <div class="bones-card">
-            <img src="../../../public/img/bones-cardbg.png" alt="" />
-            <div class="bonescheck">
-              <p>獎項名稱獎項名稱獎項名稱</p>
-              <p>積分:XXXX</p>
-              <p>剩餘數量:XXXX</p>
-            </div>
-          </div>
-          <div class="bones-card">
-            <img src="../../../public/img/bones-cardbg.png" alt="" />
-            <div class="bonescheck">
-              <p>獎項名稱獎項名稱獎項名稱</p>
-              <p>積分:XXXX</p>
-              <p>剩餘數量:XXXX</p>
-            </div>
-          </div>
-          <div class="bones-card">
-            <img src="../../../public/img/bones-cardbg.png" alt="" />
-            <div class="bonescheck">
-              <p>獎項名稱獎項名稱獎項名稱</p>
-              <p>積分:XXXX</p>
-              <p>剩餘數量:XXXX</p>
-            </div>
-          </div>
-          <div class="bones-card">
-            <img src="../../../public/img/bones-cardbg.png" alt="" />
-            <div class="bonescheck">
-              <p>獎項名稱獎項名稱獎項名稱</p>
-              <p>積分:XXXX</p>
-              <p>剩餘數量:XXXX</p>
-            </div>
-          </div>
-          <div class="bones-card">
-            <img src="../../../public/img/bones-cardbg.png" alt="" />
-            <div class="bonescheck">
-              <p>獎項名稱獎項名稱獎項名稱</p>
-              <p>積分:XXXX</p>
-              <p>剩餘數量:XXXX</p>
-            </div>
-          </div>
-        </div>
+        <div class="bones-card-row" v-html="bonesCard"></div>
       </div>
     </div>
     <div id="addides" class="addidesbg" v-if="bonesPage == 2">
@@ -196,7 +123,7 @@
 import { ref } from "vue";
 
 let bonesPage = ref(1);
-
+let bonesCard = ref("");
 let changeibendo = (e) => {
   bonesPage.value = e;
 };
@@ -216,6 +143,22 @@ axios({
 })
   .then((response) => {
     console.log(response);
+
+    for (let index = 0; index < res.data.Data.list.length; index++) {
+      let itemname = res.data.Data.list[index].itemname;
+      let points = res.data.Data.list[index].points;
+      let nleft = res.data.Data.list[index].nleft;
+      let exchangeid = res.data.Data.list[index].exchangeid;
+      bonesCard.value += `
+          <div class="bones-card" onclick="convert(${exchangeid})">
+        <img src="../../../public/img/bones-cardbg.png" alt="" />
+            <div class="bonescheck">
+              <p>${itemname}</p>
+              <p>積分:${points}</p>
+              <p>剩餘數量:${nleft}</p>
+            </div></div>
+            `;
+    }
   })
   .catch((error) => {
     axios({
@@ -227,12 +170,26 @@ axios({
       },
       data: localStorage.getItem("gameId"),
     })
-      .then((response) => {
-        console.log(response);
+      .then((res) => {
+        console.log(res);
+
+        for (let index = 0; index < res.data.Data.list.length; index++) {
+          let itemname = res.data.Data.list[index].itemname;
+          let points = res.data.Data.list[index].points;
+          let nleft = res.data.Data.list[index].nleft;
+          let exchangeid = res.data.Data.list[index].exchangeid;
+          bonesCard.value += `
+          <div class="bones-card" onclick="convert(${exchangeid})">
+        <img src="../../../public/img/bones-cardbg.png" alt="" />
+            <div class="bonescheck">
+              <p>${itemname}</p>
+              <p>積分:${points}</p>
+              <p>剩餘數量:${nleft}</p>
+            </div></div>
+            `;
+        }
       })
-      .catch((error) => {
-        console.log(error);
-      });
+      .catch((error) => {});
   });
 </script>
 <style lang="scss" scoped>
@@ -282,13 +239,15 @@ axios({
   display: flex;
   flex-wrap: wrap;
 }
-.bones-card {
+::v-deep .bones-card {
   color: #f9f7f2;
   margin-left: 3rem;
   margin-bottom: 1%;
   position: relative;
   display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
   .bonescheck {
     padding: 5%;
     display: flex;
@@ -300,6 +259,7 @@ axios({
     }
   }
 }
+
 .reward-bones {
   width: 70%;
   display: flex;
