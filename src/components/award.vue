@@ -74,23 +74,7 @@
           <th>變動後積分</th>
           <th>虛寶序號</th>
         </tr>
-
-        <tr>
-          <td>td</td>
-          <td>td</td>
-          <td>td</td>
-          <td>td</td>
-          <td>td</td>
-          <td>td</td>
-        </tr>
-        <tr>
-          <td>td</td>
-          <td>td</td>
-          <td>td</td>
-          <td>td</td>
-          <td>td</td>
-          <td>td</td>
-        </tr>
+        <div class="bonesloglog" v-html="bonesLog"></div>
       </table>
     </div>
 
@@ -146,12 +130,51 @@ import { ref } from "vue";
 
 let bonesPage = ref(1);
 let bonesCard = ref("1");
-let changeibendo = (e) => {
-  bonesPage.value = e;
-};
 let GetTotalPoints = ref("1");
+let bonesLog = ref("1");
 let zhjgamdID = {
   gameid: localStorage.getItem("gameId"),
+};
+
+let changeibendo = (e) => {
+  bonesPage.value = e;
+
+  if (e == 3) {
+    let zhjgamdIDcheck = {
+      gameid: localStorage.getItem("gameId"),
+      exchangeid: 7,
+    };
+
+    //兌換紀錄查詢
+    axios({
+      method: "post",
+      baseURL: "http://localhost:3000/GetExchangeLogs",
+      data: zhjgamdID,
+    })
+      .then((res) => {
+        bonesLog.value = "";
+        for (let index = 0; index < res.data.Data.length; index++) {
+          let itemname = res.data.Data[index].itemname;
+          let logtime = res.data.Data[index].logtime;
+          let points = res.data.Data[index].points;
+          let remark = res.data.Data[index].remark;
+          let status = res.data.Data[index].status;
+          let sum = res.data.Data[index].sum;
+
+          bonesLog.value += `
+          <p>${itemname}</p>
+          <p>${logtime}</p>
+          <p>${points}</p>
+          <p>${remark}</p>
+          <p>${status}</p>
+          <p>${sum}</p>
+            `;
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
 };
 
 axios({
@@ -190,9 +213,10 @@ axios({
         "Access-Control-Allow-Origin": "*",
         "Content-Type": "application/json",
       },
-      data: localStorage.getItem("gameId"),
+      data: zhjgamdID,
     })
       .then((res) => {
+        console.log(res);
         GetTotalPoints = res.data.Data.GetTotalPoints;
         for (let index = 0; index < res.data.Data.list.length; index++) {
           let itemname = res.data.Data.list[index].itemname;
@@ -209,20 +233,8 @@ axios({
             </div></div>
             `;
         }
-        //兌換紀錄查詢
-        axios({
-          method: "POST",
-          baseURL: "http://localhost:3000/GetExchangeLogs",
-          headers: {
-            "Access-Control-Allow-Origin": "*",
-            "Content-Type": "application/json",
-          },
-          data: localStorage.getItem("gameId"),
-        }).then((res) => {
-          console.log(res);
-        });
       })
-      .catch((error) => {});
+      .catch((err) => {});
   });
 </script>
 <style lang="scss" scoped>
@@ -231,12 +243,28 @@ axios({
   display: flex;
   justify-content: center;
 }
-.bonesLog {
+::v-deep .bonesLog {
   table {
+    .bonesloglog {
+      display: flex;
+      p {
+        font-size: 1rem;
+        width: 10vw;
+        height: 3vw;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-image: url("../assets/logtitle.png");
+        background-size: cover;
+        background-position: left top;
+        color: white;
+      }
+    }
     tr {
       display: flex;
       color: white;
       font-size: 1rem;
+      margin-left: 1%;
       th {
         font-size: 1rem;
         width: 10vw;
