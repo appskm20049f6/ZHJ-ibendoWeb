@@ -61,7 +61,7 @@
           <p>否</p>
           <input type="radio" name="years" value="No" checked />
         </label>
-        <input type="submit" value="確認/修改" class="button" />
+        <button class="button" @click="changeibendo(4)">點擊確認</button>
       </form>
     </div>
     <div class="bonesLog" v-if="bonesPage == 3">
@@ -74,30 +74,7 @@
           <th>變動後積分</th>
           <th>虛寶序號</th>
         </tr>
-        <tr>
-          <td>td</td>
-          <td>td</td>
-          <td>td</td>
-          <td>td</td>
-          <td>td</td>
-          <td>td</td>
-        </tr>
-        <tr>
-          <td>td</td>
-          <td>td</td>
-          <td>td</td>
-          <td>td</td>
-          <td>td</td>
-          <td>td</td>
-        </tr>
-        <tr>
-          <td>td</td>
-          <td>td</td>
-          <td>td</td>
-          <td>td</td>
-          <td>td</td>
-          <td>td</td>
-        </tr>
+
         <tr>
           <td>td</td>
           <td>td</td>
@@ -115,6 +92,51 @@
           <td>td</td>
         </tr>
       </table>
+    </div>
+
+    <div class="addidesid" v-if="bonesPage == 4">
+      <img src="../../../public/img/addidesbg.png" alt="" />
+      <div class="addIDcarddiv">
+        <label class="idcardon" for="idcardon" ref="idcardon">
+          <div class="addIDcard">
+            <input
+              type="file"
+              accept="image/*"
+              name="idcardon"
+              id="idcardon"
+              class="idcardfile"
+            />
+          </div>
+          <div class="upp"></div>
+          <p class="idcard-p">上傳身份證正面</p>
+        </label>
+
+        <label class="idcardon" for="idcardon">
+          <div class="addIDcard">
+            <input
+              type="file"
+              accept="image/*"
+              name="idcardon"
+              id="idcardon"
+              class="idcardfile"
+            />
+          </div>
+          <p class="idcard-p">上傳身份證反面</p>
+        </label>
+      </div>
+      <button @click="changeibendo(5)">點擊確認</button>
+    </div>
+    <div class="idcheck" v-if="bonesPage == 5">
+      <img src="../../../public/img/addidesbg.png" alt="" />
+      <p>姓名</p>
+      <p>手機號碼</p>
+      <p>E-mail</p>
+      <p>郵遞區號</p>
+      <p>寄送地址</p>
+      <p>是否年滿18歲</p>
+      <div class="addIDcard"></div>
+      <div class="addIDcard"></div>
+      <button>確認上傳</button>
     </div>
   </div>
 </template>
@@ -193,10 +215,47 @@ axios({
   });
 </script>
 <style lang="scss" scoped>
+.bonesLog {
+  width: 80%;
+  display: flex;
+  justify-content: center;
+}
+.bonesLog {
+  table {
+    tr {
+      display: flex;
+      color: white;
+      font-size: 1rem;
+      th {
+        font-size: 1rem;
+        width: 10vw;
+        height: 3vw;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-image: url("../assets/logtitle.png");
+        background-size: cover;
+        background-position: left top;
+      }
+      td {
+        font-size: 1rem;
+        width: 10vw;
+        height: 3vw;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-image: url("../assets/logtitle.png");
+        background-size: cover;
+        background-position: left top;
+      }
+    }
+  }
+}
 .award {
   display: flex;
   flex-direction: column;
   align-items: center;
+  background-repeat: no-repeat;
 }
 
 .line {
@@ -205,7 +264,8 @@ axios({
 }
 .awardbotton {
   display: flex;
-  width: 40%;
+  width: 50%;
+  align-items: center;
   a {
     width: 100%;
     img {
@@ -240,14 +300,19 @@ axios({
   flex-wrap: wrap;
 }
 ::v-deep .bones-card {
+  width: 22%;
   color: #f9f7f2;
-  margin-left: 3rem;
+  margin-left: 1rem;
   margin-bottom: 1%;
   position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  img {
+    width: 100%;
+  }
+
   .bonescheck {
     padding: 5%;
     display: flex;
@@ -255,7 +320,14 @@ axios({
     flex-direction: column;
     align-items: center;
     p {
-      margin-bottom: 13%;
+      font-size: 1.3rem;
+      margin-bottom: 10%;
+      @media (max-width: 1920px) {
+        font-size: 1rem;
+      }
+      @media (max-width: 1920px) {
+        margin-bottom: 5%;
+      }
     }
   }
 }
@@ -270,13 +342,20 @@ axios({
   display: flex;
   justify-content: center;
   align-items: center;
+
   img {
-    width: 55%;
+    width: 60%;
     position: absolute;
     z-index: 1;
     transform: translate(-50%, -50%);
     left: 50%;
     top: 70%;
+    @media (max-width: 1680px) {
+      width: 70%;
+    }
+    @media (max-width: 1366px) {
+      width: 70%;
+    }
   }
   form {
     display: flex;
@@ -288,14 +367,17 @@ axios({
     top: 65%;
     align-items: flex-end;
     input {
-      margin-bottom: 5%;
+      margin-bottom: 3%;
     }
     label {
+      font-size: 1rem;
       display: flex;
+      align-items: center;
+      margin-bottom: -2%;
     }
     .button {
       margin: auto;
-      width: 50%;
+      width: 30%;
       margin-top: 5%;
     }
     .years {
@@ -304,6 +386,56 @@ axios({
         margin-left: 10%;
       }
     }
+  }
+}
+.addidesid {
+  position: relative;
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  .idcard-p {
+    position: absolute;
+    z-index: 15;
+  }
+  img {
+    position: absolute;
+  }
+  .addIDcarddiv {
+    margin-top: 10%;
+    display: flex;
+    gap: 5%;
+  }
+  .addIDcard {
+    position: relative;
+    display: flex;
+    height: 7.15vw;
+    width: 11vw;
+    border: 4px dashed #dcb783;
+    border-radius: 10px;
+    justify-content: center;
+    align-items: center;
+  }
+  button {
+    z-index: 5;
+    margin-top: 3%;
+  }
+  .idcardfile {
+    display: none;
+  }
+}
+.idcardon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.idcheck {
+  display: flex;
+  justify-content: center;
+  width: 80%;
+  img {
+    position: absolute;
+    z-index: -1;
   }
 }
 </style>
