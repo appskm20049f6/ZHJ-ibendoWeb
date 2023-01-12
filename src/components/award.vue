@@ -16,15 +16,16 @@
 
     <div class="reward-bones" v-if="bonesPage == 1">
       <div class="integral">
-        <img src="../../../public/img/integral-bg.png" alt="" />
+        <img src="../assets/integral-bg.png" alt="" />
         <p>{{ GetTotalPoints }}</p>
       </div>
+
       <div class="bonesbg">
         <div class="bones-card-row" v-html="bonesCard"></div>
       </div>
     </div>
     <div id="addides" class="addidesbg" v-if="bonesPage == 2">
-      <img src="../../../public/img/addidesbg.png" alt="" />
+      <img src="../assets/addidesbg.png" alt="" />
       <form method="post" autocomplete>
         <label for="">姓名：<input type="text" name="name" required /> </label>
         <label for=""
@@ -79,7 +80,7 @@
     </div>
 
     <div class="addidesid" v-if="bonesPage == 4">
-      <img src="../../../public/img/addidesbg.png" alt="" />
+      <img src="../assets/addidesbg.png" alt="" />
       <div class="addIDcarddiv">
         <label class="idcardon" for="idcardon" ref="idcardon">
           <div class="addIDcard">
@@ -111,7 +112,7 @@
       <button @click="changeibendo(5)">點擊確認</button>
     </div>
     <div class="idcheck" v-if="bonesPage == 5">
-      <img src="../../../public/img/addidesbg.png" alt="" />
+      <img src="../assets/addidesbg.png" alt="" />
       <p>姓名</p>
       <p>手機號碼</p>
       <p>E-mail</p>
@@ -172,7 +173,35 @@ let changeibendo = (e) => {
         }
       })
       .catch((err) => {
-        console.log(err);
+        axios({
+          method: "post",
+          baseURL:
+            "https://zhj.gameflier.com/service/BonusReward/api/GetExchangeLogs",
+          data: zhjgamdID,
+        })
+          .then((res) => {
+            bonesLog.value = "";
+            for (let index = 0; index < res.data.Data.length; index++) {
+              let itemname = res.data.Data[index].itemname;
+              let logtime = res.data.Data[index].logtime;
+              let points = res.data.Data[index].points;
+              let remark = res.data.Data[index].remark;
+              let status = res.data.Data[index].status;
+              let sum = res.data.Data[index].sum;
+
+              bonesLog.value += `
+          <p>${itemname}</p>
+          <p>${logtime}</p>
+          <p>${points}</p>
+          <p>${remark}</p>
+          <p>${status}</p>
+          <p>${sum}</p>
+            `;
+            }
+          })
+          .catch((err) => {
+            alert("資料錯誤請聯絡客服人員進行確認");
+          });
       });
   }
 };
@@ -187,8 +216,9 @@ axios({
   data: zhjgamdID,
 })
   .then((response) => {
-    console.log(response);
-
+    console.log(res);
+    GetTotalPoints = res.data.Data.GetTotalPoints;
+    bonesCard.value = "";
     for (let index = 0; index < res.data.Data.list.length; index++) {
       let itemname = res.data.Data.list[index].itemname;
       let points = res.data.Data.list[index].points;
@@ -196,7 +226,6 @@ axios({
       let exchangeid = res.data.Data.list[index].exchangeid;
       bonesCard.value += `
           <div class="bones-card" onclick="convert(${exchangeid})">
-        <img src="../../../public/img/bones-cardbg.png" alt="" />
             <div class="bonescheck">
               <p>${itemname}</p>
               <p>積分:${points}</p>
@@ -225,7 +254,6 @@ axios({
           let exchangeid = res.data.Data.list[index].exchangeid;
           bonesCard.value += `
           <div class="bones-card" onclick="convert(${exchangeid})">
-        <img src="../../../public/img/bones-cardbg.png" alt="" />
             <div class="bonescheck">
               <p>${itemname}</p>
               <p>積分:${points}</p>
@@ -264,7 +292,6 @@ axios({
       display: flex;
       color: white;
       font-size: 1rem;
-      margin-left: 1%;
       th {
         font-size: 1rem;
         width: 10vw;
@@ -334,20 +361,22 @@ axios({
   flex-direction: column;
 }
 .bones-card-row {
+  width: 60%;
   position: absolute;
   display: flex;
   flex-wrap: wrap;
 }
 ::v-deep .bones-card {
-  width: 22%;
+  width: 30%;
   color: #f9f7f2;
   margin-left: 1rem;
   margin-bottom: 1%;
   position: relative;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
   justify-content: center;
+
   img {
     width: 100%;
   }
@@ -355,12 +384,19 @@ axios({
   .bonescheck {
     padding: 5%;
     display: flex;
-    position: absolute;
     flex-direction: column;
     align-items: center;
+    background-image: url("../assets/bones-cardbg.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 100%;
+
     p {
-      font-size: 1.3rem;
-      margin-bottom: 10%;
+      display: flex;
+      font-size: 1.7rem;
+      height: 3vw;
+      align-items: center;
+
       @media (max-width: 1920px) {
         font-size: 1rem;
       }
