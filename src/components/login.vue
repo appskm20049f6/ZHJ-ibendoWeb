@@ -141,6 +141,18 @@ let phonelogin = (e) => {
   display: flex;
   justify-content: center;
   align-items: center;
+  .loginbg {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    img {
+      display: flex;
+      @media (max-width: 1440px) {
+        width: 40%;
+      }
+    }
+  }
 }
 .ibendologo {
   width: 100%;
@@ -155,6 +167,21 @@ let phonelogin = (e) => {
   position: absolute;
   display: flex;
   gap: 1%;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  img {
+    width: 100%;
+  }
+  @media (max-width: 1280px) {
+    gap: 0%;
+    a {
+      margin-right: -1%;
+    }
+    img {
+      width: 80%;
+    }
+  }
 }
 
 .phone-login {
