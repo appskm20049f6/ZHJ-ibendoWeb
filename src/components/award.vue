@@ -17,7 +17,7 @@
     <div class="reward-bones" v-if="bonesPage == 1">
       <div class="integral">
         <img src="../../../public/img/integral-bg.png" alt="" />
-        <p>33563</p>
+        <p>{{ GetTotalPoints }}</p>
       </div>
       <div class="bonesbg">
         <div class="bones-card-row" v-html="bonesCard"></div>
@@ -145,11 +145,11 @@
 import { ref } from "vue";
 
 let bonesPage = ref(1);
-let bonesCard = ref("");
+let bonesCard = ref("1");
 let changeibendo = (e) => {
   bonesPage.value = e;
 };
-
+let GetTotalPoints = ref("1");
 let zhjgamdID = {
   gameid: localStorage.getItem("gameId"),
 };
@@ -193,8 +193,7 @@ axios({
       data: localStorage.getItem("gameId"),
     })
       .then((res) => {
-        console.log(res);
-
+        GetTotalPoints = res.data.Data.GetTotalPoints;
         for (let index = 0; index < res.data.Data.list.length; index++) {
           let itemname = res.data.Data.list[index].itemname;
           let points = res.data.Data.list[index].points;
@@ -210,6 +209,18 @@ axios({
             </div></div>
             `;
         }
+        //兌換紀錄查詢
+        axios({
+          method: "POST",
+          baseURL: "http://localhost:3000/GetExchangeLogs",
+          headers: {
+            "Access-Control-Allow-Origin": "*",
+            "Content-Type": "application/json",
+          },
+          data: localStorage.getItem("gameId"),
+        }).then((res) => {
+          console.log(res);
+        });
       })
       .catch((error) => {});
   });
