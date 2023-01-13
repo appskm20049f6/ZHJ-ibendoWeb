@@ -25,41 +25,30 @@
       </div>
     </div>
     <div id="addides" class="addidesbg" v-if="bonesPage == 2">
-      <form method="post" autocomplete>
+      <form autocomplete>
         <label for=""
           ><p>姓名：</p>
-          <input type="text" v-model="name" required />
+          <input type="text" v-model="name" />
         </label>
         <label for=""
           ><p>手機號碼：</p>
-          <input
-            type="tel"
-            pattern="[0-9]{10}"
-            required
-            v-model="phoneNumber"
-          />
+          <input type="tel" v-model="phoneNumber" />
         </label>
         <label for=""
           ><p>E-mail：</p>
           <input
             type="email"
-            required
             v-model="email"
             placeholder="sophie@example.com"
           />
         </label>
         <label for=""
           ><p>郵遞區號：</p>
-          <input type="text" required v-model="postalcode" />
+          <input type="text" v-model="postalcode" />
         </label>
         <label for=""
           ><p>寄送地址：</p>
-          <input
-            type="text"
-            placeholder="請輸入完整地址"
-            required
-            v-model="addides"
-          />
+          <input type="text" placeholder="請輸入完整地址" v-model="addides" />
         </label>
         <label for="" class="years">
           <div class="tex"><p>是否已滿18歲:</p></div>
