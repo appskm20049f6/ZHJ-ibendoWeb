@@ -54,11 +54,15 @@ let loginType = ref(1);
 const loginTypeChange = (e) => {
   loginType.value = e;
 };
+let lourl = {
+  url: "http://localhost:5173/",
+};
 
 let login = (e) => {
   axios({
-    method: "GET",
+    method: "POST",
     url: "https://zhj.gameflier.com/service/BonusReward/api/GetOauthCallback",
+    data: lourl,
   })
     .then((response) => {
       if (e == 1) {
@@ -73,8 +77,9 @@ let login = (e) => {
     })
     .catch((error) => {
       axios({
-        method: "get",
+        method: "POST",
         baseURL: "http://localhost:3000/zhj3men",
+        data: lourl,
       })
         .then((response) => {
           if (e == 1) {
