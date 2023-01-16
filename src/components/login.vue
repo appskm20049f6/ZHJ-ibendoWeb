@@ -116,7 +116,7 @@ let phonelogin = (e) => {
     data: logindata,
   })
     .then((response) => {
-      localStorage.setItem("gameId", response.data.Data.GameId);
+      sessionStorage.setItem("gameId", response.data.Data.GameId);
       window.location.reload();
     })
     .catch((error) => {
@@ -130,7 +130,7 @@ let phonelogin = (e) => {
         data: logindata,
       })
         .then((response) => {
-          localStorage.setItem("gameId", response.data.Data.GameId);
+          sessionStorage.setItem("gameId", response.data.Data.GameId);
           window.location.reload();
         })
         .catch((error) => {
