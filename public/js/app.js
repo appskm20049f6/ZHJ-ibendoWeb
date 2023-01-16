@@ -1,14 +1,12 @@
 let url = window.location.href;
-sessionStorage.setItem("url", url);
 
 if (url.indexOf("?") != -1) {
   let ary1 = url.split("?");
   let ary2 = ary1[1].split("&");
   let ary3 = ary2[0].split("=");
-  console.log(ary1);
-  console.log(ary2);
-  console.log(ary3);
   sessionStorage.setItem("gameId", ary3[1]);
+  sessionStorage.setItem("url", ary1[0]);
+  document.location.href = sessionStorage.getItem("url");
 }
 
 //全域JS事件
