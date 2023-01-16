@@ -16,10 +16,10 @@ import { ref } from "@vue/reactivity";
 
 let Div = ref(1);
 
-if (localStorage.getItem("gameId") === null) {
+if (sessionStorage.getItem("gameId") === null) {
   Div.value = 1;
 } else {
-  if (localStorage.getItem("gameId").length > 4) {
+  if (sessionStorage.getItem("gameId").length > 4) {
     Div.value = 2;
   }
 }

@@ -21,8 +21,8 @@
 import { ref } from "@vue/reactivity";
 
 let logOut = () => {
-  localStorage.removeItem("gameId");
-  window.location.reload();
+  sessionStorage.removeItem("gameId");
+  window.location.reload(sessionStorage.getItem("url"));
 };
 </script>
 <style lang="scss" scoped>

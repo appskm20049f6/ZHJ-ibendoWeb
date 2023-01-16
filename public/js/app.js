@@ -8,13 +8,13 @@ if (url.indexOf("?") != -1) {
   console.log(ary1);
   console.log(ary2);
   console.log(ary3);
-  localStorage.setItem("gameId", ary3[1]);
+  sessionStorage.setItem("gameId", ary3[1]);
 }
 
 //全域JS事件
 let convert = (e) => {
   let datadata = {
-    gameid: localStorage.getItem("gameId"),
+    gameid: sessionStorage.getItem("gameId"),
     exchangeid: e,
   };
 
