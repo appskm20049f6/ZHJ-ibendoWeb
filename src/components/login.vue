@@ -148,6 +148,7 @@ let phonelogin = (e) => {
     justify-content: center;
     img {
       display: flex;
+      width: 25%;
       @media (max-width: 1440px) {
         width: 40%;
       }
@@ -159,7 +160,7 @@ let phonelogin = (e) => {
   display: flex;
   justify-content: center;
   img {
-    width: 40%;
+    width: 25%;
   }
 }
 .loginicon {
@@ -167,9 +168,8 @@ let phonelogin = (e) => {
   position: absolute;
   display: flex;
   gap: 1%;
-  width: 100%;
-  justify-content: center;
-  align-items: center;
+  width: 18%;
+  justify-content: space-evenly;
   img {
     width: 100%;
   }
@@ -189,6 +189,9 @@ let phonelogin = (e) => {
   align-items: center;
   justify-content: center;
   position: relative;
+  img {
+    width: 20%;
+  }
 }
 .login-input {
   position: absolute;

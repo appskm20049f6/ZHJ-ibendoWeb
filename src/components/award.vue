@@ -4,11 +4,11 @@
       <a @click="changeibendo(1)"
         ><img class="line" src="../../public/img/bones.png" alt=""
       /></a>
-      <img class="line" src="../../public/img/line.png" alt="" />
+      <img class="lineb" src="../../public/img/line.png" alt="" />
       <a @click="changeibendo(2)"
         ><img class="line" src="../../public/img/addides.png" alt=""
       /></a>
-      <img class="line" src="../../public/img/line.png" alt="" />
+      <img class="lineb" src="../../public/img/line.png" alt="" />
       <a @click="changeibendo(3)"
         ><img class="line" src="../../public/img/log.png" alt=""
       /></a>
@@ -25,42 +25,34 @@
       </div>
     </div>
     <div id="addides" class="addidesbg" v-if="bonesPage == 2">
-      <form autocomplete>
-        <label for=""
-          ><p>姓名：</p>
-          <input type="text" v-model="name" />
-        </label>
-        <label for=""
-          ><p>手機號碼：</p>
-          <input type="tel" v-model="phoneNumber" />
-        </label>
-        <label for=""
-          ><p>E-mail：</p>
-          <input
-            type="email"
-            v-model="email"
-            placeholder="sophie@example.com"
-          />
-        </label>
-        <label for=""
-          ><p>郵遞區號：</p>
-          <input type="text" v-model="postalcode" />
-        </label>
-        <label for=""
-          ><p>寄送地址：</p>
-          <input type="text" placeholder="請輸入完整地址" v-model="addides" />
-        </label>
-        <label for="" class="years">
-          <div class="tex"><p>是否已滿18歲:</p></div>
-          <div class="tex2">
-            <p>是</p>
-            <input type="radio" v-model="years" value="Yes" />
-            <p>否</p>
-            <input type="radio" v-model="years" value="No" />
-          </div>
-        </label>
-        <button class="button" @click="changeibendo(4)">點擊確認</button>
-      </form>
+      <label for=""
+        ><p>姓名：</p>
+        <input type="text" v-model="name" />
+      </label>
+      <label for=""
+        ><p>手機號碼：</p>
+        <input type="tel" v-model="phoneNumber" />
+      </label>
+      <label for=""
+        ><p>E-mail:</p>
+        <input type="email" v-model="email" placeholder="sophie@example.com" />
+      </label>
+      <label for=""
+        ><p>郵遞區號：</p>
+        <input type="text" v-model="postalcode" />
+      </label>
+      <label for=""
+        ><p>寄送地址：</p>
+        <input type="text" placeholder="請輸入完整地址" v-model="addides" />
+      </label>
+      <label for="" class="years">
+        <p>是否已滿18歲:</p>
+        <p>是</p>
+        <input type="radio" v-model="years" value="是" />
+        <p>否</p>
+        <input type="radio" v-model="years" value="否" />
+      </label>
+      <button class="button" @click="changeibendo(4)">點擊確認/修改資料</button>
     </div>
     <div class="bonesLog" v-if="bonesPage == 3">
       <table>
@@ -75,48 +67,77 @@
         <div class="bonesloglog" v-html="bonesLog"></div>
       </table>
     </div>
-
-    <div class="addidesid" v-if="bonesPage == 4">
-      <div class="addIDcarddiv">
-        <label class="idcardon" for="idcardon" ref="idcardon">
-          <div class="addIDcard">
-            <input
-              type="file"
-              accept="image/*"
-              class="idcardfile"
-              @change="fileSelected(e)"
-            />
+    <div class="addidesbg2" v-if="bonesPage == 4">
+      <div class="idcarduploaddiv">
+        <label for="idcardon">
+          <input
+            type="file"
+            accept="image/*"
+            class="idcardfile"
+            name="idcardon"
+            id="idcardon"
+            @change="upload" />
+          <div
+            class="idcardupload"
+            id="idcarduploadon"
+            v-show="idcardopen == 1"
+          >
+            上傳身分證正面
           </div>
-          <div :src="image.value" width="200"></div>
-          <p class="idcard-p">上傳身份證正面{{ image }}</p>
-        </label>
-
-        <label class="idcardon" for="idcardon">
-          <div class="addIDcard">
-            <input
-              type="file"
-              accept="image/*"
-              name="idcardon"
-              id="idcardon"
-              class="idcardfile"
-            />
+          <div class="idcardpre" id="idcardpreon" v-show="idcardopen == 2">
+            <img :src="demo" /></div
+        ></label>
+        <label for="idcardclose">
+          <input
+            type="file"
+            accept="image/*"
+            class="idcardfile"
+            name="idcardclose"
+            id="idcardclose"
+            @change="upload2" />
+          <div
+            class="idcardupload"
+            id="idcarduploadon"
+            v-show="idcardclose == 1"
+          >
+            上傳身分證反面
           </div>
-          <p class="idcard-p">上傳身份證反面</p>
-        </label>
+          <div class="idcardpre" id="idcardpreon" v-show="idcardclose == 2">
+            <img :src="demo2" /></div
+        ></label>
       </div>
-      <button @click="changeibendo(5)">點擊確認</button>
+      <button @click="changeibendo(5)">確認</button>
     </div>
-    <div class="idcheck" v-if="bonesPage == 5">
-      <img src="../assets/addidesbg.png" alt="" />
-      <p>姓名</p>
-      <p>手機號碼</p>
-      <p>E-mail</p>
-      <p>郵遞區號</p>
-      <p>寄送地址</p>
-      <p>是否年滿18歲</p>
-      <div class="addIDcard"></div>
-      <div class="addIDcard"></div>
-      <button>確認上傳</button>
+    <div class="addidesbg3" v-if="bonesPage == 5">
+      <div class="checkpre">
+        <div class="pre">
+          <p>姓名:</p>
+          <span>{{ name }}</span>
+        </div>
+        <div class="pre">
+          <p>手機號碼:</p>
+          <span>{{ phoneNumber }}</span>
+        </div>
+        <div class="pre">
+          <p>E-mail:</p>
+          <span>{{ email }}</span>
+        </div>
+        <div class="pre">
+          <p>郵遞區號:</p>
+          <span>{{ postalcode }}</span>
+        </div>
+        <div class="pre">
+          <p>寄送地址:</p>
+          <span>{{ addides }}</span>
+        </div>
+      </div>
+      <div class="idcarduploaddiv">
+        <div class="idcardupload" id="idcarduploadon"><img :src="demo" /></div>
+        <div class="idcardupload" id="idcarduploadoff">
+          <img :src="demo2" />
+        </div>
+      </div>
+      <button @click="addCreate(up)">確認無誤進行上傳</button>
     </div>
   </div>
 </template>
@@ -133,9 +154,46 @@ let zhjgamdID = {
 };
 
 let changeibendo = (e) => {
-  bonesPage.value = e;
+  if (e == 1) {
+    bonesPage.value = e;
+  }
+
+  if (e == 2) {
+    axios({
+      method: "POST",
+      url: "https://zhj.gameflier.com/service/BonusReward/api/CheckGameID",
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+        "Content-Type": "application/json",
+      },
+      data: zhjgamdID,
+    })
+      .then((res) => {
+        if (res.data.Data.exists == false) {
+          bonesPage.value = e;
+        }
+      })
+      .catch((error) => {
+        axios({
+          method: "POST",
+          baseURL: "http://localhost:3000/CheckGameID",
+          headers: {
+            "Access-Control-Allow-Origin": "*",
+            "Content-Type": "application/json",
+          },
+          data: zhjgamdID,
+        })
+          .then((res) => {
+            if (res.data.Data.exists == false) {
+              bonesPage.value = e;
+            }
+          })
+          .catch((err) => {});
+      });
+  }
 
   if (e == 3) {
+    bonesPage.value = e;
     let zhjgamdIDcheck = {
       gameid: localStorage.getItem("gameId"),
       exchangeid: 7,
@@ -201,11 +259,16 @@ let changeibendo = (e) => {
   }
 
   if (e == 4) {
-    console.log(name.value);
+    bonesPage.value = e;
+    sessionStorage.setItem("uname", name.value);
+    sessionStorage.setItem("phone", phoneNumber.value);
+    sessionStorage.setItem("email", email.value);
+    sessionStorage.setItem("zcode", postalcode.value);
+    sessionStorage.setItem("address", addides.value);
+    sessionStorage.setItem("adult", years.value);
   }
-
   if (e == 5) {
-    console.log(image.value);
+    bonesPage.value = e;
   }
 };
 
@@ -218,7 +281,7 @@ axios({
   },
   data: zhjgamdID,
 })
-  .then((response) => {
+  .then((res) => {
     GetTotalPoints = res.data.Data.GetTotalPoints;
     bonesCard.value = "";
     for (let index = 0; index < res.data.Data.list.length; index++) {
@@ -271,17 +334,84 @@ const phoneNumber = ref("");
 const email = ref("");
 const postalcode = ref("");
 const addides = ref("");
-const years = ref("");
-const image = ref();
-let imageLoaded = (e) => {
-  image = e.target.result;
+const years = ref("是");
+
+//圖片上傳轉化base64正面
+let idcardopen = ref(1);
+let idcarduploadon = document.querySelector("#idcarduploadon");
+let idcardpreon = document.querySelector("#idcardpreon");
+let input = document.querySelector("#idcardon");
+let demo = ref("");
+
+let reader = new FileReader();
+reader.onload = (e) => {
+  demo.value = e.target.result;
+  return demo.value;
 };
-let fileSelected = (e) => {
-  const file = e.target.files(0);
-  const reader = new FileReader();
-  reader.readAsDataURL(file);
-  reader.addEventListener("load", imageLoaded);
-  console.log("轉換");
+let upload = (e) => {
+  let uploadimg = e.target.files || e.dataTransfer.files;
+  reader.readAsDataURL(uploadimg[0]);
+  idcardopen = 2;
+};
+
+//圖片上傳轉化base64反面
+let idcardclose = ref(1);
+let idcarduploadclose = document.querySelector("#idcarduploadon");
+let idcardpreclose = document.querySelector("#idcardpreon");
+let input2 = document.querySelector("#idcardon");
+let demo2 = ref("");
+
+let reader2 = new FileReader();
+reader2.onload = (e) => {
+  demo2.value = e.target.result;
+  return demo2.value;
+};
+let upload2 = (e) => {
+  let uploadimg2 = e.target.files || e.dataTransfer.files;
+  reader2.readAsDataURL(uploadimg2[0]);
+  idcardclose = 2;
+};
+
+let addCreate = (e) => {
+  let addID = {
+    gameid: localStorage.getItem("gameId"),
+    uname: sessionStorage.getItem("uname"),
+    phone: sessionStorage.getItem("phone"),
+    email: sessionStorage.getItem("email"),
+    zcode: sessionStorage.getItem("zcode"),
+    address: sessionStorage.getItem("address"),
+    adult: sessionStorage.getItem("adult"),
+    IDCardRS: demo.value,
+    IDCardWS: demo2.value,
+  };
+
+  axios({
+    method: "POST",
+    url: "https://zhj.gameflier.com/service/BonusReward/api/GetExchange",
+    headers: {
+      "Access-Control-Allow-Origin": "*",
+      "Content-Type": "application/json",
+    },
+    data: addID,
+  })
+    .then((res) => {
+      alert(res.data.Message);
+    })
+    .catch((error) => {
+      axios({
+        method: "POST",
+        baseURL: "http://localhost:3000/Create",
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+          "Content-Type": "application/json",
+        },
+        data: addID,
+      })
+        .then((res) => {
+          alert(res.data.Message);
+        })
+        .catch((err) => {});
+    });
 };
 </script>
 <style lang="scss" scoped>
@@ -343,9 +473,10 @@ let fileSelected = (e) => {
   background-repeat: no-repeat;
 }
 
-.line {
-  margin-right: -1%;
-  margin-left: -1%;
+.lineb {
+  margin-right: -2%;
+  margin-left: -2%;
+  margin-top: 2%;
 }
 .awardbotton {
   display: flex;
@@ -415,7 +546,7 @@ let fileSelected = (e) => {
 
     p {
       display: flex;
-      font-size: 1.7rem;
+      font-size: 1.1rem;
       height: 4vh;
       align-items: center;
     }
@@ -439,6 +570,9 @@ let fileSelected = (e) => {
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
+  padding: 3%;
+
   img {
     width: 60%;
     position: absolute;
@@ -453,49 +587,39 @@ let fileSelected = (e) => {
       width: 70%;
     }
   }
-  form {
+  .years {
+    width: 50%;
     display: flex;
-    flex-direction: column;
-    z-index: 2;
+    input {
+      width: 5%;
+    }
+    p:first-child {
+      width: 40%;
+    }
+    p {
+      width: 10%;
+    }
+  }
+  label {
+    font-size: 2rem;
+    display: flex;
+    align-items: center;
+    margin-bottom: 1%;
     width: 100%;
-    margin-top: -10%;
-
-    label {
-      font-size: 2rem;
-      display: flex;
-      align-items: center;
-      margin-bottom: 1%;
-      width: 100%;
-      justify-content: center;
-      p {
-        font-size: 1.5rem;
-        width: 15%;
-      }
-      input {
-        height: 2vh;
-        width: 30%;
-      }
+    justify-content: center;
+    p {
+      font-size: 1.5rem;
+      width: 15%;
     }
-    .button {
-      margin: auto;
+    input {
+      height: 2vh;
       width: 30%;
-      margin-top: 1%;
     }
-    .years {
-      display: flex;
-      width: 100%;
-      .tex {
-        width: 15%;
-        display: flex;
-        p {
-          width: 100%;
-        }
-      }
-      .tex2 {
-        width: 30%;
-        display: flex;
-      }
-    }
+  }
+  .button {
+    margin: auto;
+    width: 20%;
+    margin-top: 1%;
   }
 }
 .addidesid {
@@ -530,18 +654,84 @@ let fileSelected = (e) => {
     display: none;
   }
 }
-.idcardon {
+
+.addidesbg2 {
+  background-image: url("../assets/addidesbg.png");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: 100% 100%;
+  height: 60vh;
+  width: 50%;
   display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 1%;
+  .idcarduploaddiv {
+    margin-top: -15%;
+    display: flex;
+    margin-bottom: 3%;
+  }
+}
+.idcardupload {
+  display: flex;
+  width: 10vw;
+  height: 6.5vw;
+  margin-right: 1%;
   align-items: center;
   justify-content: center;
-}
-.idcheck {
-  display: flex;
-  justify-content: center;
-  width: 80%;
+  border: 4px dashed #dcb783;
+  border-radius: 10px;
   img {
-    position: absolute;
-    z-index: -1;
+    width: 10vw;
+    height: 6.5vw;
+  }
+}
+
+.addidesbg3 {
+  background-image: url("../assets/addidesbg.png");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: 100% 100%;
+  height: 60vh;
+  width: 50%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+  padding: 1%;
+  .checkpre {
+    .pre {
+      display: flex;
+      p {
+        display: flex;
+        width: 25%;
+        justify-content: flex-end;
+      }
+      span {
+        margin-left: 2%;
+      }
+    }
+  }
+  .idcarduploaddiv {
+    display: flex;
+    margin-bottom: 2%;
+  }
+  .checkpre {
+    margin-top: 10%;
+    width: 40%;
+    p {
+      margin-bottom: 1%;
+    }
+  }
+}
+.idcardfile {
+  display: none;
+}
+.idcardpre {
+  img {
+    width: 10vw;
+    height: 6vw;
   }
 }
 </style>

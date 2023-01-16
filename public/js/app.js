@@ -1,11 +1,10 @@
 //全域JS事件
 let convert = (e) => {
+  console.log(e + "被點了");
   let datadata = {
     gameid: localStorage.getItem("gameId"),
     exchangeid: e,
   };
-  console.log(e);
-  console.log(localStorage.getItem("gameId"));
 
   axios({
     method: "POST",
@@ -18,6 +17,7 @@ let convert = (e) => {
   })
     .then((res) => {
       console.log(res);
+      alert(res.data.Message);
     })
     .catch((err) => {
       console.log(err);

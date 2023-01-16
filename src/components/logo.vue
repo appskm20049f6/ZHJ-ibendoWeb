@@ -40,7 +40,7 @@ let logOut = () => {
   }
 }
 .logo {
-  width: 13%;
+  width: 10%;
   display: flex;
   flex-direction: column;
   align-items: flex-end;
