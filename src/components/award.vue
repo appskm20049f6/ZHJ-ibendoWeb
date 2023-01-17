@@ -139,6 +139,36 @@
       </div>
       <button @click="addCreate(up)">確認無誤進行上傳</button>
     </div>
+    <div class="addidesbg3" v-if="bonesPage == 6">
+      <div class="checkpre">
+        <div class="pre">
+          <p>姓名:</p>
+          <span>{{ name }}</span>
+        </div>
+        <div class="pre">
+          <p>手機號碼:</p>
+          <span>{{ phoneNumber }}</span>
+        </div>
+        <div class="pre">
+          <p>E-mail:</p>
+          <span>{{ email }}</span>
+        </div>
+        <div class="pre">
+          <p>郵遞區號:</p>
+          <span>{{ postalcode }}</span>
+        </div>
+        <div class="pre">
+          <p>寄送地址:</p>
+          <span>{{ addides }}</span>
+        </div>
+      </div>
+      <div class="idcarduploaddiv">
+        <div class="idcardupload" id="idcarduploadon"><img :src="demo" /></div>
+        <div class="idcardupload" id="idcarduploadoff">
+          <img :src="demo2" />
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -150,8 +180,15 @@ let bonesCard = ref("");
 let GetTotalPoints = ref("");
 let bonesLog = ref("");
 let zhjgamdID = {
-  gameid: localStorage.getItem("gameId"),
+  gameid: sessionStorage.getItem("gameId"),
 };
+
+const name = ref("");
+const phoneNumber = ref("");
+const email = ref("");
+const postalcode = ref("");
+const addides = ref("");
+const years = ref("是");
 
 let changeibendo = (e) => {
   if (e == 1) {
@@ -161,7 +198,7 @@ let changeibendo = (e) => {
   if (e == 2) {
     axios({
       method: "POST",
-      url: "https://zhj.gameflier.com/service/BonusReward/api/CheckGameID",
+      baseURL: "https://zhj.gameflier.com/service/BonusReward/api/CheckGameID",
       headers: {
         "Access-Control-Allow-Origin": "*",
         "Content-Type": "application/json",
@@ -169,7 +206,30 @@ let changeibendo = (e) => {
       data: zhjgamdID,
     })
       .then((res) => {
-        if (res.data.Data.exists == false) {
+        if (res.data.Data.exists == true) {
+          //查詢資料庫記錄
+          axios({
+            method: "POST",
+            baseURL: "http://localhost:3000/ShippingInfo",
+            headers: {
+              "Access-Control-Allow-Origin": "*",
+              "Content-Type": "application/json",
+            },
+            data: zhjgamdID,
+          })
+            .then((res) => {
+              name.value = res.data.Data.uname;
+              phoneNumber.value = res.data.Data.phone;
+              email.value = res.data.Data.email;
+              postalcode.value = res.data.Data.zcode;
+              addides.value = res.data.Data.address;
+              demo.value = res.data.Data.IDCardRSBase64;
+              demo2.value = res.data.Data.IDCardWSBase64;
+            })
+            .catch((error) => {});
+          //轉到v-ifbones6查看紀錄的頁面
+          bonesPage.value = 6;
+        } else {
           bonesPage.value = e;
         }
       })
@@ -184,11 +244,35 @@ let changeibendo = (e) => {
           data: zhjgamdID,
         })
           .then((res) => {
-            if (res.data.Data.exists == false) {
+            if (res.data.Data.exists == true) {
+              //查詢資料庫記錄
+              axios({
+                method: "POST",
+                url: "http://localhost:3000/ShippingInfo",
+                headers: {
+                  "Access-Control-Allow-Origin": "*",
+                  "Content-Type": "application/json",
+                },
+                data: zhjgamdID,
+              })
+                .then((res) => {
+                  name.value = res.data.Data.uname;
+                  phoneNumber.value = res.data.Data.phone;
+                  email.value = res.data.Data.email;
+                  postalcode.value = res.data.Data.zcode;
+                  addides.value = res.data.Data.address;
+                  demo.value = res.data.Data.IDCardRSBase64;
+                  demo2.value = res.data.Data.IDCardWSBase64;
+                })
+                .catch((error) => {});
+              //查詢資料庫記錄
+
+              bonesPage.value = 6;
+            } else {
               bonesPage.value = e;
             }
           })
-          .catch((err) => {});
+          .catch((error) => {});
       });
   }
 
@@ -252,9 +336,7 @@ let changeibendo = (e) => {
             `;
             }
           })
-          .catch((err) => {
-            alert("資料錯誤請聯絡客服人員進行確認");
-          });
+          .catch((err) => {});
       });
   }
 
@@ -274,7 +356,7 @@ let changeibendo = (e) => {
 
 axios({
   method: "POST",
-  url: "https://zhj.gameflier.com/service/BonusReward/api/GetExchange",
+  baseURL: "https://zhj.gameflier.com/service/BonusReward/api/GetExchange",
   headers: {
     "Access-Control-Allow-Origin": "*",
     "Content-Type": "application/json",
@@ -289,10 +371,12 @@ axios({
       let points = res.data.Data.list[index].points;
       let nleft = res.data.Data.list[index].nleft;
       let exchangeid = res.data.Data.list[index].exchangeid;
+      let content = res.data.Data.list[index].content;
       bonesCard.value += `
           <div class="bones-card" onclick="convert(${exchangeid})">
             <div class="bonescheck">
               <p>${itemname}</p>
+              <p>${content}</p>
               <p>積分:${points}</p>
               <p>剩餘數量:${nleft}</p>
             </div></div>
@@ -311,15 +395,18 @@ axios({
     })
       .then((res) => {
         GetTotalPoints = res.data.Data.GetTotalPoints;
+        bonesCard.value = "";
         for (let index = 0; index < res.data.Data.list.length; index++) {
           let itemname = res.data.Data.list[index].itemname;
           let points = res.data.Data.list[index].points;
           let nleft = res.data.Data.list[index].nleft;
           let exchangeid = res.data.Data.list[index].exchangeid;
+          let content = res.data.Data.list[index].content;
           bonesCard.value += `
           <div class="bones-card" onclick="convert(${exchangeid})">
             <div class="bonescheck">
               <p>${itemname}</p>
+              <p>${content}</p>
               <p>積分:${points}</p>
               <p>剩餘數量:${nleft}</p>
             </div></div>
@@ -328,13 +415,6 @@ axios({
       })
       .catch((err) => {});
   });
-
-const name = ref("");
-const phoneNumber = ref("");
-const email = ref("");
-const postalcode = ref("");
-const addides = ref("");
-const years = ref("是");
 
 //圖片上傳轉化base64正面
 let idcardopen = ref(1);
@@ -374,7 +454,7 @@ let upload2 = (e) => {
 
 let addCreate = (e) => {
   let addID = {
-    gameid: localStorage.getItem("gameId"),
+    gameid: sessionStorage.getItem("gameId"),
     uname: sessionStorage.getItem("uname"),
     phone: sessionStorage.getItem("phone"),
     email: sessionStorage.getItem("email"),
@@ -387,7 +467,7 @@ let addCreate = (e) => {
 
   axios({
     method: "POST",
-    url: "https://zhj.gameflier.com/service/BonusReward/api/GetExchange",
+    baseURL: "https://zhj.gameflier.com/service/BonusReward/api/GetExchange",
     headers: {
       "Access-Control-Allow-Origin": "*",
       "Content-Type": "application/json",
