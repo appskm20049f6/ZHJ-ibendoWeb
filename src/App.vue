@@ -23,6 +23,18 @@ if (sessionStorage.getItem("gameId") === null) {
     Div.value = 2;
   }
 }
+
+let url = window.location.href;
+sessionStorage.setItem("url", url);
+
+if (url.indexOf("?") != -1) {
+  let ary1 = url.split("?");
+  let ary2 = ary1[1].split("&");
+  let ary3 = ary2[0].split("=");
+  sessionStorage.setItem("gameId", ary3[1]);
+  sessionStorage.setItem("url", ary1[0]);
+  document.location.href = sessionStorage.getItem("url");
+}
 </script>
 
 <style scoped lang="scss">

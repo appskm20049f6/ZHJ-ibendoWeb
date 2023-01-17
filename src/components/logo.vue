@@ -22,6 +22,9 @@ import { ref } from "@vue/reactivity";
 
 let logOut = () => {
   sessionStorage.removeItem("gameId");
+  sessionStorage.removeItem("role_id");
+  sessionStorage.removeItem("server_id");
+  sessionStorage.removeItem("role_name");
   document.location.href = sessionStorage.getItem("url");
 };
 </script>

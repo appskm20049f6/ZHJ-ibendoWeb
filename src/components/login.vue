@@ -55,7 +55,7 @@ const loginTypeChange = (e) => {
   loginType.value = e;
 };
 let lourl = {
-  url: "http://localhost:5173/",
+  url: sessionStorage.getItem("url"),
 };
 
 let login = (e) => {

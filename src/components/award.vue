@@ -1,6 +1,26 @@
 <template>
   <div class="award">
-    <div class="awardbotton">
+    <div class="awardbotton" v-if="serverPage == 0">
+      <div class="serverselect">
+        <img src="../assets/ibendo-logo.png" alt="" />
+        <img src="../assets/phone-login.png" alt="" />
+        <div class="serverselect1">
+          <p>請選擇伺服器：</p>
+          <select v-model="server_id" @change="changeServer">
+            <option disabled value="">請選擇</option>
+            <option value="10001">1.排雲破浪</option>
+            <option value="10002">2.花羽幻蝶</option>
+          </select>
+        </div>
+
+        <div class="role_name">
+          <p>請確認角色名稱：</p>
+          <p>{{ GameID }}</p>
+        </div>
+        <button @click="rolenameCheck">確認無誤進行登入</button>
+      </div>
+    </div>
+    <div class="awardbotton" v-if="serverPage == 1">
       <a @click="changeibendo(1)"
         ><img class="line" src="../../public/img/bones.png" alt=""
       /></a>
@@ -174,13 +194,16 @@
 
 <script setup>
 import { ref } from "vue";
-
-let bonesPage = ref(1);
+let server_id = ref("");
+let GameID = ref("此伺服器您尚未持有任何角色");
+let serverPage = ref(0);
+let bonesPage = ref(0);
 let bonesCard = ref("");
 let GetTotalPoints = ref("");
 let bonesLog = ref("");
 let zhjgamdID = {
   gameid: sessionStorage.getItem("gameId"),
+  serverid: sessionStorage.getItem("server_id"),
 };
 
 const name = ref("");
@@ -189,6 +212,54 @@ const email = ref("");
 const postalcode = ref("");
 const addides = ref("");
 const years = ref("是");
+
+let changeServer = () => {
+  axios({
+    method: "POST",
+    baseURL: "http://localhost:3000/QueryUserRole",
+    headers: {
+      "Access-Control-Allow-Origin": "*",
+      "Content-Type": "application/json",
+    },
+    data: zhjgamdID,
+  }).then((res) => {
+    GameID.value = "此伺服器您尚未持有任何角色";
+    sessionStorage.removeItem("role_id");
+    sessionStorage.removeItem("server_id");
+    sessionStorage.removeItem("role_name");
+
+    if (server_id.value == res.data.Data.model[0].server_id) {
+      GameID.value = res.data.Data.model[0].role_name;
+      sessionStorage.setItem("role_id", res.data.Data.model[0].role_id);
+      sessionStorage.setItem("server_id", res.data.Data.model[0].server_id);
+      sessionStorage.setItem("role_name", res.data.Data.model[0].role_name);
+    }
+
+    if (server_id.value == res.data.Data.model[1].server_id) {
+      GameID.value = res.data.Data.model[1].role_name;
+      sessionStorage.setItem("role_id", res.data.Data.model[1].role_id);
+      sessionStorage.setItem("server_id", res.data.Data.model[1].server_id);
+      sessionStorage.setItem("role_name", res.data.Data.model[1].role_name);
+    }
+  });
+};
+
+if (sessionStorage.getItem("role_name") === null) {
+  serverPage.value = 0;
+} else {
+  serverPage.value = 1;
+  bonesPage.value = 1;
+}
+
+let rolenameCheck = () => {
+  if (sessionStorage.getItem("role_name") === null) {
+    serverPage.value = 0;
+    alert("請選擇正確的伺服器並確認角色是否正確");
+  } else {
+    serverPage.value = 1;
+    bonesPage.value = 1;
+  }
+};
 
 let changeibendo = (e) => {
   if (e == 1) {
@@ -290,6 +361,7 @@ let changeibendo = (e) => {
       data: zhjgamdID,
     })
       .then((res) => {
+        console.log(res);
         bonesLog.value = "";
         for (let index = 0; index < res.data.Data.length; index++) {
           let itemname = res.data.Data[index].itemname;
@@ -299,14 +371,14 @@ let changeibendo = (e) => {
           let status = res.data.Data[index].status;
           let sum = res.data.Data[index].sum;
 
-          bonesLog.value += `
+          bonesLog.value += `<div class="bonesLogflex">
           <p>${logtime}</p>
+          <p>${status}</p>
           <p>${itemname}</p>
           <p>${points}</p>
-          <p>${remark}</p>
-          <p>${status}</p>
           <p>${sum}</p>
-            `;
+          <p>${remark}</p>
+        </div>`;
         }
       })
       .catch((err) => {
@@ -489,21 +561,57 @@ let addCreate = (e) => {
       })
         .then((res) => {
           alert(res.data.Message);
+          bonesPage = 6;
         })
         .catch((err) => {});
     });
 };
 </script>
 <style lang="scss" scoped>
+.serverselect {
+  position: relative;
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+  img {
+    width: 70%;
+  }
+  .serverselect1 {
+    top: 65%;
+    position: absolute;
+    display: flex;
+    color: rgb(253, 230, 99);
+  }
+  .role_name {
+    top: 73%;
+    position: absolute;
+    display: flex;
+    color: rgb(253, 230, 99);
+  }
+  button {
+    top: 83%;
+    position: absolute;
+    display: flex;
+  }
+}
 .bonesLog {
   width: 80%;
   display: flex;
   justify-content: center;
 }
+
 ::v-deep .bonesLog {
   table {
+    .bonesLogflex {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+    }
     .bonesloglog {
       display: flex;
+      width: 100%;
+      flex-wrap: wrap;
       p {
         font-size: 1rem;
         width: 10vw;
@@ -521,6 +629,7 @@ let addCreate = (e) => {
       display: flex;
       color: white;
       font-size: 1rem;
+      justify-content: center;
       th {
         font-size: 1rem;
         width: 10vw;
