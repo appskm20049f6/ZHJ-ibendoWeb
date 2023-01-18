@@ -39,6 +39,9 @@ let logOut = () => {
     margin-left: -3%;
     margin-right: -3%;
   }
+  a:hover {
+    cursor: pointer;
+  }
   > img {
     position: absolute;
   }
@@ -47,9 +50,12 @@ let logOut = () => {
   width: 10%;
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
+  align-items: center;
   @media (max-width: 1366px) {
     width: 15%;
+  }
+  @media (max-width: 836px) {
+    width: 35%;
   }
   a {
     display: flex;

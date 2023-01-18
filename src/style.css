@@ -12,5 +12,17 @@ body {
   background-repeat: no-repeat;
   background-position: left center;
   background-size: cover;
+}
+
+@media screen and (max-width: 414px) {
+  body {
+    min-height: 100vh;
+    background-color: black;
+    background-image: url("../public/img/mobile-backgrond.png");
+    background-repeat: no-repeat;
+    background-position: left center;
+    background-size: cover;
+  }
+
 
 }

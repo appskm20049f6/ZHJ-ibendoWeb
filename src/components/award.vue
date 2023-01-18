@@ -72,7 +72,7 @@
         <p>否</p>
         <input type="radio" v-model="years" value="否" />
       </label>
-      <button class="button" @click="changeibendo(4)">點擊確認/修改資料</button>
+      <button class="button" @click="changeibendo(4)">點擊確認</button>
     </div>
     <div class="bonesLog" v-if="bonesPage == 3">
       <table>
@@ -81,7 +81,7 @@
           <th>狀況</th>
           <th>兌換獎勵</th>
           <th>積分變動</th>
-          <th>變動後積分</th>
+          <th>變動積分</th>
           <th>虛寶序號</th>
         </tr>
         <div class="bonesloglog" v-html="bonesLog"></div>
@@ -196,7 +196,7 @@
 import { ref } from "vue";
 
 let server_id = ref("");
-let GameID = ref("此伺服器您尚未持有任何角色");
+let GameID = ref("此伺服器尚未持有角色");
 let serverPage = ref(0);
 let bonesPage = ref(0);
 let bonesCard = ref("");
@@ -280,6 +280,7 @@ let changeServer = () => {
             "server_name",
             res.data.Data.model[0].server_name
           );
+          location.reload();
         }
 
         if (server_id.value == res.data.Data.model[1].server_id) {
@@ -291,6 +292,7 @@ let changeServer = () => {
             "server_name",
             res.data.Data.model[1].server_name
           );
+          location.reload();
         }
       });
     });
@@ -310,97 +312,15 @@ let rolenameCheck = () => {
   } else {
     serverPage.value = 1;
     bonesPage.value = 1;
+    location.reload();
   }
 };
 
 let changeibendo = (e) => {
   if (e == 1) {
     bonesPage.value = e;
-    console.log(zhjgamdID);
   }
 
-  // if (e == 2) {
-  //   axios({
-  //     method: "POST",
-  //     baseURL: "https://zhj.gameflier.com/service/BonusReward/api/CheckGameID",
-  //     headers: {
-  //       "Access-Control-Allow-Origin": "*",
-  //       "Content-Type": "application/json",
-  //     },
-  //     data: zhjgamdID,
-  //   })
-  //     .then((res) => {
-  //       if (res.data.Data.exists == true) {
-  //         //查詢資料庫記錄
-  //         axios({
-  //           method: "POST",
-  //           baseURL:
-  //             "https://zhj.gameflier.com/service/BonusReward/api/ShippingInfo",
-  //           headers: {
-  //             "Access-Control-Allow-Origin": "*",
-  //             "Content-Type": "application/json",
-  //           },
-  //           data: zhjgamdID,
-  //         })
-  //           .then((res) => {
-  //             name.value = res.data.Data.uname;
-  //             phoneNumber.value = res.data.Data.phone;
-  //             email.value = res.data.Data.email;
-  //             postalcode.value = res.data.Data.zcode;
-  //             addides.value = res.data.Data.address;
-  //             demo.value = res.data.Data.IDCardRSBase64;
-  //             demo2.value = res.data.Data.IDCardWSBase64;
-  //           })
-  //           .catch((error) => {});
-  //         //轉到v-ifbones6查看紀錄的頁面
-  //         bonesPage.value = 6;
-  //       } else {
-  //         bonesPage.value = e;
-  //       }
-  //     })
-  //     .catch((error) => {
-  //       axios({
-  //         method: "POST",
-  //         baseURL:
-  //           "https://zhj.gameflier.com/service/BonusReward/api/CheckGameID",
-  //         headers: {
-  //           "Access-Control-Allow-Origin": "*",
-  //           "Content-Type": "application/json",
-  //         },
-  //         data: zhjgamdID,
-  //       })
-  //         .then((res) => {
-  //           if (res.data.Data.exists == true) {
-  //             //查詢資料庫記錄
-  //             axios({
-  //               method: "POST",
-  //               url: "https://zhj.gameflier.com/service/BonusReward/api/ShippingInfo",
-  //               headers: {
-  //                 "Access-Control-Allow-Origin": "*",
-  //                 "Content-Type": "application/json",
-  //               },
-  //               data: zhjgamdID,
-  //             })
-  //               .then((res) => {
-  //                 name.value = res.data.Data.uname;
-  //                 phoneNumber.value = res.data.Data.phone;
-  //                 email.value = res.data.Data.email;
-  //                 postalcode.value = res.data.Data.zcode;
-  //                 addides.value = res.data.Data.address;
-  //                 demo.value = res.data.Data.IDCardRSBase64;
-  //                 demo2.value = res.data.Data.IDCardWSBase64;
-  //               })
-  //               .catch((error) => {});
-  //             //查詢資料庫記錄
-
-  //             bonesPage.value = 6;
-  //           } else {
-  //             bonesPage.value = e;
-  //           }
-  //         })
-  //         .catch((error) => {});
-  //     });
-  // }
   if (e == 2) {
     axios({
       method: "POST",
@@ -498,7 +418,6 @@ let changeibendo = (e) => {
       data: zhjgamdID,
     })
       .then((res) => {
-        console.log(res);
         bonesLog.value = "";
         for (let index = 0; index < res.data.Data.length; index++) {
           let itemname = res.data.Data[index].itemname;
@@ -525,7 +444,6 @@ let changeibendo = (e) => {
           data: zhjgamdID,
         })
           .then((res) => {
-            console.log(res);
             bonesLog.value = "";
             for (let index = 0; index < res.data.Data.length; index++) {
               let itemname = res.data.Data[index].itemname;
@@ -680,8 +598,13 @@ let addCreate = (e) => {
     baseURL:
       "https://zhj.gameflier.com/service/BonusReward/api/ShippingInfo/Create",
     data: addID,
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded",
+    },
   })
-    .then((res) => {})
+    .then((res) => {
+      alert(res.data.Message);
+    })
     .catch((err) => {
       axios({
         method: "post",
@@ -689,7 +612,7 @@ let addCreate = (e) => {
         data: zhjgamdID,
       })
         .then((res) => {
-          console.log(res);
+          alert(res.data.Message);
         })
         .catch((err) => {});
     });
@@ -702,9 +625,19 @@ let addCreate = (e) => {
   width: 100%;
   flex-direction: column;
   align-items: center;
+  @media screen and (max-width: 836px) {
+    margin-top: 40%;
+  }
+  @media screen and (max-width: 414px) {
+    margin-top: 80%;
+  }
   img {
     width: 70%;
+    @media screen and (max-width: 414px) {
+      width: 100%;
+    }
   }
+
   .serverselect1 {
     top: 65%;
     position: absolute;
@@ -716,11 +649,33 @@ let addCreate = (e) => {
     position: absolute;
     display: flex;
     color: rgb(253, 230, 99);
+    @media screen and (max-width: 414px) {
+      font-size: 0.8rem;
+      flex-direction: column;
+    }
+    p {
+      @media screen and (max-width: 1280px) {
+        font-size: 0.8rem;
+      }
+      @media screen and (max-width: 1440px) {
+        font-size: 0.8rem;
+      }
+      @media screen and (max-width: 836px) {
+        font-size: 1.1rem;
+      }
+      @media screen and (max-width: 414px) {
+        font-size: 0.8rem;
+      }
+    }
   }
   button {
+    margin-top: 1%;
     top: 83%;
     position: absolute;
     display: flex;
+    @media screen and (max-width: 414px) {
+      font-size: 0.8rem;
+    }
   }
 }
 .bonesLog {
@@ -730,27 +685,48 @@ let addCreate = (e) => {
 }
 
 ::v-deep .bonesLog {
+  @media screen and (max-width: 414px) {
+    margin-top: 1%;
+  }
+
   table {
     .bonesLogflex {
       width: 100%;
       display: flex;
       justify-content: center;
+
+      p:last-child {
+        font-size: 0.8rem;
+      }
+    }
+    .bonesloglog::-webkit-scrollbar {
+      width: 5px;
+    }
+    .bonesloglog::-webkit-scrollbar-thumb {
+      background-color: #771f1f;
     }
     .bonesloglog {
       display: flex;
       width: 100%;
       flex-wrap: wrap;
+      overflow-y: scroll;
+      height: 40vh;
       p {
-        font-size: 1rem;
-        width: 10vw;
-        height: 3vw;
+        font-size: 0.8rem;
+        width: 16vw;
+        height: 4vw;
         display: flex;
         align-items: center;
         justify-content: center;
         background-image: url("../assets/logtitle.png");
-        background-size: cover;
+        background-size: 100% 100%;
         background-position: left top;
         color: white;
+        @media screen and (max-width: 414px) {
+          width: 16vw;
+          height: 18vw;
+          font-size: 0.3rem;
+        }
       }
     }
     tr {
@@ -759,16 +735,23 @@ let addCreate = (e) => {
       font-size: 1rem;
       justify-content: center;
       th {
-        font-size: 1rem;
-        width: 10vw;
+        font-size: 0.8rem;
+        width: 16vw;
         height: 3vw;
         display: flex;
         align-items: center;
         justify-content: center;
         background-image: url("../assets/logtitle.png");
-        background-size: cover;
+        background-size: 100% 100%;
         background-position: left top;
+        color: white;
+        @media screen and (max-width: 414px) {
+          width: 16vw;
+          height: 5vw;
+          font-size: 0.3rem;
+        }
       }
+
       td {
         font-size: 1rem;
         width: 10vw;
@@ -789,17 +772,39 @@ let addCreate = (e) => {
   align-items: center;
   background-repeat: no-repeat;
 }
-
+.line {
+  cursor: pointer;
+}
 .lineb {
   margin-right: -2%;
   margin-left: -2%;
   margin-top: 2%;
+  @media screen and (max-width: 1440px) {
+    margin-top: 4%;
+  }
+  @media screen and (max-width: 836px) {
+    margin-top: 2%;
+  }
+  @media screen and (max-width: 414px) {
+    margin-top: 2%;
+    width: 10%;
+  }
 }
 .awardbotton {
   display: flex;
   width: 33%;
   align-items: center;
   margin-top: 1%;
+  @media screen and (max-width: 1366px) {
+    width: 40%;
+  }
+  @media screen and (max-width: 836px) {
+    width: 80%;
+  }
+  @media screen and (max-width: 414px) {
+    width: 80%;
+    margin-top: -5%;
+  }
   a {
     width: 100%;
     img {
@@ -812,9 +817,12 @@ let addCreate = (e) => {
   color: #f9f7f2;
   position: relative;
   display: flex;
-
+  @media screen and (max-width: 414px) {
+    width: 40%;
+    align-items: center;
+  }
   p {
-    font-size: 1.7rem;
+    font-size: 1.3rem;
     transform: translate(-50%, -50%);
     top: 60%;
     left: 50%;
@@ -835,6 +843,16 @@ let addCreate = (e) => {
   position: absolute;
   display: flex;
   flex-wrap: wrap;
+  @media screen and (max-width: 1920px) {
+    width: 70%;
+  }
+  @media screen and (max-width: 834px) {
+    width: 93%;
+    justify-content: center;
+  }
+}
+::v-deep .bones-card:hover {
+  cursor: pointer;
 }
 ::v-deep .bones-card {
   width: 30%;
@@ -846,6 +864,9 @@ let addCreate = (e) => {
   flex-direction: row;
   align-items: center;
   justify-content: center;
+  @media screen and (max-width: 834px) {
+    width: 60%;
+  }
 
   img {
     width: 100%;
@@ -863,19 +884,34 @@ let addCreate = (e) => {
 
     p {
       display: flex;
-      font-size: 1.1rem;
-      height: 4vh;
+      font-size: 1rem;
       align-items: center;
+      width: 100%;
+      @media screen and (max-width: 1680px) {
+        font-size: 1rem;
+      }
+      @media screen and (max-width: 1440px) {
+        font-size: 1rem;
+      }
+      @media screen and (max-width: 1280px) {
+        font-size: 0.8rem;
+      }
     }
   }
 }
 
 .reward-bones {
-  width: 70%;
+  width: 60%;
   display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  margin-top: 2%;
+  flex-direction: column;
+  @media screen and (max-width: 836px) {
+    width: 100%;
+    align-items: center;
+  }
+  @media screen and (max-width: 414px) {
+    width: 100%;
+    align-items: center;
+  }
 }
 .addidesbg {
   background-image: url("../assets/addidesbg.png");
@@ -888,8 +924,15 @@ let addCreate = (e) => {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  padding: 3%;
-
+  padding: 5%;
+  @media screen and (max-width: 834px) {
+    width: 90%;
+    padding: 8%;
+  }
+  @media screen and (max-width: 414px) {
+    width: 90%;
+    padding: 10%;
+  }
   img {
     width: 60%;
     position: absolute;
@@ -897,21 +940,18 @@ let addCreate = (e) => {
     transform: translate(-50%, -50%);
     left: 50%;
     top: 70%;
-    @media (max-width: 1680px) {
-      width: 70%;
-    }
-    @media (max-width: 1366px) {
-      width: 70%;
-    }
   }
   .years {
     width: 50%;
     display: flex;
+    @media screen and (max-width: 414px) {
+      width: 70%;
+    }
     input {
       width: 5%;
     }
     p:first-child {
-      width: 40%;
+      width: 80%;
     }
     p {
       width: 10%;
@@ -924,9 +964,17 @@ let addCreate = (e) => {
     margin-bottom: 1%;
     width: 100%;
     justify-content: center;
+
     p {
       font-size: 1.5rem;
-      width: 15%;
+      width: 25%;
+      @media screen and (max-width: 1440px) {
+        font-size: 1.3rem;
+      }
+      @media screen and (max-width: 414px) {
+        width: 40%;
+        font-size: 1rem;
+      }
     }
     input {
       height: 2vh;
@@ -935,8 +983,12 @@ let addCreate = (e) => {
   }
   .button {
     margin: auto;
-    width: 20%;
+    width: 35%;
     margin-top: 1%;
+    @media screen and (max-width: 414px) {
+      width: 40%;
+      font-size: 1rem;
+    }
   }
 }
 .addidesid {
@@ -984,10 +1036,16 @@ let addCreate = (e) => {
   align-items: center;
   flex-direction: column;
   padding: 1%;
+  @media screen and (max-width: 836px) {
+    width: 90%;
+  }
   .idcarduploaddiv {
     margin-top: -15%;
     display: flex;
     margin-bottom: 3%;
+    @media screen and (max-width: 836px) {
+      flex-direction: column;
+    }
   }
 }
 .idcardupload {
@@ -999,9 +1057,13 @@ let addCreate = (e) => {
   justify-content: center;
   border: 4px dashed #dcb783;
   border-radius: 10px;
+  @media screen and (max-width: 836px) {
+    width: 28vw;
+    height: 17vw;
+  }
   img {
-    width: 10vw;
-    height: 6.5vw;
+    width: 100%;
+    height: 100%;
   }
 }
 
@@ -1017,26 +1079,61 @@ let addCreate = (e) => {
   align-items: center;
   flex-direction: column;
   padding: 1%;
+
+  @media screen and (max-width: 836px) {
+    width: 99%;
+  }
+  @media screen and (max-width: 414px) {
+    margin-top: -5%;
+    background-size: 100% 100%;
+  }
   .checkpre {
     .pre {
       display: flex;
+
       p {
         display: flex;
         width: 25%;
         justify-content: flex-end;
+        @media screen and (max-width: 1440px) {
+          width: 35%;
+        }
+        @media screen and (max-width: 836px) {
+          width: 35%;
+          font-size: 1.4rem;
+        }
+        @media screen and (max-width: 414px) {
+          width: 35%;
+          font-size: 0.3rem;
+        }
       }
       span {
         margin-left: 2%;
+        @media screen and (max-width: 836px) {
+          width: 35%;
+          font-size: 1.4rem;
+        }
+        @media screen and (max-width: 414px) {
+          width: 35%;
+          font-size: 0.3rem;
+        }
       }
     }
   }
   .idcarduploaddiv {
     display: flex;
     margin-bottom: 2%;
+    @media screen and (max-width: 414px) {
+      flex-direction: column;
+    }
   }
   .checkpre {
     margin-top: 10%;
     width: 40%;
+    @media screen and (max-width: 836px) {
+      width: 95%;
+    }
+
     p {
       margin-bottom: 1%;
     }
@@ -1049,6 +1146,11 @@ let addCreate = (e) => {
   img {
     width: 10vw;
     height: 6vw;
+    margin: 1%;
+    @media screen and (max-width: 836px) {
+      width: 30vw;
+      height: 18vw;
+    }
   }
 }
 </style>

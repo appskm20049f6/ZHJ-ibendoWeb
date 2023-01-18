@@ -17,6 +17,7 @@ let convert = (e) => {
     data: datadata,
   })
     .then((res) => {
+      location.reload();
       alert(res.data.Message);
     })
     .catch((err) => {
@@ -30,6 +31,7 @@ let convert = (e) => {
         data: datadata,
       })
         .then((res) => {
+          location.reload();
           alert(res.data.Message);
         })
         .catch((err) => {

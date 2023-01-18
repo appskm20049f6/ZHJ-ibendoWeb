@@ -129,7 +129,6 @@ let phonelogin = (e) => {
         data: logindata,
       })
         .then((response) => {
-          console.log(response);
           sessionStorage.setItem("gameId", response.data.Data.GameId);
           sessionStorage.setItem("token", response.data.Data.Token);
           window.location.reload();
@@ -147,6 +146,8 @@ let phonelogin = (e) => {
   display: flex;
   justify-content: center;
   align-items: center;
+  @media screen and (max-width: 834px) {
+  }
   .loginbg {
     display: flex;
     width: 100%;
@@ -158,6 +159,9 @@ let phonelogin = (e) => {
       @media (max-width: 1440px) {
         width: 40%;
       }
+      @media (max-width: 834px) {
+        width: 50%;
+      }
     }
   }
 }
@@ -166,6 +170,9 @@ let phonelogin = (e) => {
   display: flex;
   justify-content: center;
   img {
+    @media screen and (max-width: 836px) {
+      width: 50%;
+    }
     width: 25%;
   }
 }
@@ -179,14 +186,11 @@ let phonelogin = (e) => {
   img {
     width: 100%;
   }
-  @media (max-width: 1280px) {
-    gap: 0%;
-    a {
-      margin-right: -1%;
-    }
-    img {
-      width: 80%;
-    }
+  @media (max-width: 1440px) {
+    width: 25%;
+  }
+  @media (max-width: 836px) {
+    width: 40%;
   }
 }
 
@@ -197,6 +201,12 @@ let phonelogin = (e) => {
   position: relative;
   img {
     width: 20%;
+    @media screen and (max-width: 836px) {
+      width: 40%;
+    }
+    @media screen and (max-width: 414px) {
+      width: 80%;
+    }
   }
 }
 .login-input {

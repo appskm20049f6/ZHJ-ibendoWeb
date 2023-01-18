@@ -43,10 +43,19 @@ if (url.indexOf("?") != -1) {
 .logoindex {
   display: flex;
   justify-content: flex-end;
+  @media screen and (max-width: 836px) {
+    justify-content: center;
+  }
 }
 
 .loginindex {
   display: flex;
   flex-direction: column;
+  @media screen and (max-width: 836px) {
+    margin-top: 50%;
+  }
+  @media screen and (max-width: 414px) {
+    margin-top: 70%;
+  }
 }
 </style>
