@@ -46,7 +46,7 @@
 
 <script setup>
 import { ref } from "@vue/reactivity";
-let phoneTop = ref("");
+let phoneTop = ref(886);
 let phoneNumber = ref("");
 let typePassword = ref("");
 let loginType = ref(1);

@@ -194,6 +194,7 @@
 
 <script setup>
 import { ref } from "vue";
+
 let server_id = ref("");
 let GameID = ref("此伺服器您尚未持有任何角色");
 let serverPage = ref(0);
@@ -229,12 +230,17 @@ let changeServer = () => {
       sessionStorage.removeItem("role_id");
       sessionStorage.removeItem("server_id");
       sessionStorage.removeItem("role_name");
+      sessionStorage.removeItem("server_name");
 
       if (server_id.value == res.data.Data.model[0].server_id) {
         GameID.value = res.data.Data.model[0].role_name;
         sessionStorage.setItem("role_id", res.data.Data.model[0].role_id);
         sessionStorage.setItem("server_id", res.data.Data.model[0].server_id);
         sessionStorage.setItem("role_name", res.data.Data.model[0].role_name);
+        sessionStorage.setItem(
+          "server_name",
+          res.data.Data.model[0].server_name
+        );
       }
 
       if (server_id.value == res.data.Data.model[1].server_id) {
@@ -242,6 +248,10 @@ let changeServer = () => {
         sessionStorage.setItem("role_id", res.data.Data.model[1].role_id);
         sessionStorage.setItem("server_id", res.data.Data.model[1].server_id);
         sessionStorage.setItem("role_name", res.data.Data.model[1].role_name);
+        sessionStorage.setItem(
+          "server_name",
+          res.data.Data.model[1].server_name
+        );
       }
     })
     .catch((error) => {
@@ -259,12 +269,17 @@ let changeServer = () => {
         sessionStorage.removeItem("role_id");
         sessionStorage.removeItem("server_id");
         sessionStorage.removeItem("role_name");
+        sessionStorage.removeItem("server_name");
 
         if (server_id.value == res.data.Data.model[0].server_id) {
           GameID.value = res.data.Data.model[0].role_name;
           sessionStorage.setItem("role_id", res.data.Data.model[0].role_id);
           sessionStorage.setItem("server_id", res.data.Data.model[0].server_id);
           sessionStorage.setItem("role_name", res.data.Data.model[0].role_name);
+          sessionStorage.setItem(
+            "server_name",
+            res.data.Data.model[0].server_name
+          );
         }
 
         if (server_id.value == res.data.Data.model[1].server_id) {
@@ -272,6 +287,10 @@ let changeServer = () => {
           sessionStorage.setItem("role_id", res.data.Data.model[1].role_id);
           sessionStorage.setItem("server_id", res.data.Data.model[1].server_id);
           sessionStorage.setItem("role_name", res.data.Data.model[1].role_name);
+          sessionStorage.setItem(
+            "server_name",
+            res.data.Data.model[1].server_name
+          );
         }
       });
     });
@@ -297,6 +316,7 @@ let rolenameCheck = () => {
 let changeibendo = (e) => {
   if (e == 1) {
     bonesPage.value = e;
+    console.log(zhjgamdID);
   }
 
   // if (e == 2) {
@@ -652,7 +672,27 @@ let addCreate = (e) => {
     adult: sessionStorage.getItem("adult"),
     IDCardRS: demo.value,
     IDCardWS: demo2.value,
+    token: sessionStorage.getItem("token"),
   };
+
+  axios({
+    method: "post",
+    baseURL:
+      "https://zhj.gameflier.com/service/BonusReward/api/ShippingInfo/Create",
+    data: addID,
+  })
+    .then((res) => {})
+    .catch((err) => {
+      axios({
+        method: "post",
+        baseURL: "http://localhost:3000/Create",
+        data: zhjgamdID,
+      })
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((err) => {});
+    });
 };
 </script>
 <style lang="scss" scoped>
