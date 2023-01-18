@@ -204,6 +204,7 @@ let bonesLog = ref("");
 let zhjgamdID = {
   gameid: sessionStorage.getItem("gameId"),
   serverid: sessionStorage.getItem("server_id"),
+  token: sessionStorage.getItem("token"),
 };
 
 const name = ref("");
@@ -222,26 +223,58 @@ let changeServer = () => {
       "Content-Type": "application/json",
     },
     data: zhjgamdID,
-  }).then((res) => {
-    GameID.value = "此伺服器您尚未持有任何角色";
-    sessionStorage.removeItem("role_id");
-    sessionStorage.removeItem("server_id");
-    sessionStorage.removeItem("role_name");
+  })
+    .then((res) => {
+      GameID.value = "此伺服器您尚未持有任何角色";
+      sessionStorage.removeItem("role_id");
+      sessionStorage.removeItem("server_id");
+      sessionStorage.removeItem("role_name");
 
-    if (server_id.value == res.data.Data.model[0].server_id) {
-      GameID.value = res.data.Data.model[0].role_name;
-      sessionStorage.setItem("role_id", res.data.Data.model[0].role_id);
-      sessionStorage.setItem("server_id", res.data.Data.model[0].server_id);
-      sessionStorage.setItem("role_name", res.data.Data.model[0].role_name);
-    }
+      if (server_id.value == res.data.Data.model[0].server_id) {
+        GameID.value = res.data.Data.model[0].role_name;
+        sessionStorage.setItem("role_id", res.data.Data.model[0].role_id);
+        sessionStorage.setItem("server_id", res.data.Data.model[0].server_id);
+        sessionStorage.setItem("role_name", res.data.Data.model[0].role_name);
+      }
 
-    if (server_id.value == res.data.Data.model[1].server_id) {
-      GameID.value = res.data.Data.model[1].role_name;
-      sessionStorage.setItem("role_id", res.data.Data.model[1].role_id);
-      sessionStorage.setItem("server_id", res.data.Data.model[1].server_id);
-      sessionStorage.setItem("role_name", res.data.Data.model[1].role_name);
-    }
-  });
+      if (server_id.value == res.data.Data.model[1].server_id) {
+        GameID.value = res.data.Data.model[1].role_name;
+        sessionStorage.setItem("role_id", res.data.Data.model[1].role_id);
+        sessionStorage.setItem("server_id", res.data.Data.model[1].server_id);
+        sessionStorage.setItem("role_name", res.data.Data.model[1].role_name);
+      }
+    })
+    .catch((error) => {
+      axios({
+        method: "POST",
+        baseURL:
+          "https://zhj.gameflier.com/service/BonusReward/api/QueryUserRole",
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+          "Content-Type": "application/json",
+        },
+        data: zhjgamdID,
+      }).then((res) => {
+        GameID.value = "此伺服器您尚未持有任何角色";
+        sessionStorage.removeItem("role_id");
+        sessionStorage.removeItem("server_id");
+        sessionStorage.removeItem("role_name");
+
+        if (server_id.value == res.data.Data.model[0].server_id) {
+          GameID.value = res.data.Data.model[0].role_name;
+          sessionStorage.setItem("role_id", res.data.Data.model[0].role_id);
+          sessionStorage.setItem("server_id", res.data.Data.model[0].server_id);
+          sessionStorage.setItem("role_name", res.data.Data.model[0].role_name);
+        }
+
+        if (server_id.value == res.data.Data.model[1].server_id) {
+          GameID.value = res.data.Data.model[1].role_name;
+          sessionStorage.setItem("role_id", res.data.Data.model[1].role_id);
+          sessionStorage.setItem("server_id", res.data.Data.model[1].server_id);
+          sessionStorage.setItem("role_name", res.data.Data.model[1].role_name);
+        }
+      });
+    });
 };
 
 if (sessionStorage.getItem("role_name") === null) {
@@ -266,6 +299,88 @@ let changeibendo = (e) => {
     bonesPage.value = e;
   }
 
+  // if (e == 2) {
+  //   axios({
+  //     method: "POST",
+  //     baseURL: "https://zhj.gameflier.com/service/BonusReward/api/CheckGameID",
+  //     headers: {
+  //       "Access-Control-Allow-Origin": "*",
+  //       "Content-Type": "application/json",
+  //     },
+  //     data: zhjgamdID,
+  //   })
+  //     .then((res) => {
+  //       if (res.data.Data.exists == true) {
+  //         //查詢資料庫記錄
+  //         axios({
+  //           method: "POST",
+  //           baseURL:
+  //             "https://zhj.gameflier.com/service/BonusReward/api/ShippingInfo",
+  //           headers: {
+  //             "Access-Control-Allow-Origin": "*",
+  //             "Content-Type": "application/json",
+  //           },
+  //           data: zhjgamdID,
+  //         })
+  //           .then((res) => {
+  //             name.value = res.data.Data.uname;
+  //             phoneNumber.value = res.data.Data.phone;
+  //             email.value = res.data.Data.email;
+  //             postalcode.value = res.data.Data.zcode;
+  //             addides.value = res.data.Data.address;
+  //             demo.value = res.data.Data.IDCardRSBase64;
+  //             demo2.value = res.data.Data.IDCardWSBase64;
+  //           })
+  //           .catch((error) => {});
+  //         //轉到v-ifbones6查看紀錄的頁面
+  //         bonesPage.value = 6;
+  //       } else {
+  //         bonesPage.value = e;
+  //       }
+  //     })
+  //     .catch((error) => {
+  //       axios({
+  //         method: "POST",
+  //         baseURL:
+  //           "https://zhj.gameflier.com/service/BonusReward/api/CheckGameID",
+  //         headers: {
+  //           "Access-Control-Allow-Origin": "*",
+  //           "Content-Type": "application/json",
+  //         },
+  //         data: zhjgamdID,
+  //       })
+  //         .then((res) => {
+  //           if (res.data.Data.exists == true) {
+  //             //查詢資料庫記錄
+  //             axios({
+  //               method: "POST",
+  //               url: "https://zhj.gameflier.com/service/BonusReward/api/ShippingInfo",
+  //               headers: {
+  //                 "Access-Control-Allow-Origin": "*",
+  //                 "Content-Type": "application/json",
+  //               },
+  //               data: zhjgamdID,
+  //             })
+  //               .then((res) => {
+  //                 name.value = res.data.Data.uname;
+  //                 phoneNumber.value = res.data.Data.phone;
+  //                 email.value = res.data.Data.email;
+  //                 postalcode.value = res.data.Data.zcode;
+  //                 addides.value = res.data.Data.address;
+  //                 demo.value = res.data.Data.IDCardRSBase64;
+  //                 demo2.value = res.data.Data.IDCardWSBase64;
+  //               })
+  //               .catch((error) => {});
+  //             //查詢資料庫記錄
+
+  //             bonesPage.value = 6;
+  //           } else {
+  //             bonesPage.value = e;
+  //           }
+  //         })
+  //         .catch((error) => {});
+  //     });
+  // }
   if (e == 2) {
     axios({
       method: "POST",
@@ -281,7 +396,8 @@ let changeibendo = (e) => {
           //查詢資料庫記錄
           axios({
             method: "POST",
-            baseURL: "http://localhost:3000/ShippingInfo",
+            baseURL:
+              "https://zhj.gameflier.com/service/BonusReward/api/ShippingInfo",
             headers: {
               "Access-Control-Allow-Origin": "*",
               "Content-Type": "application/json",
@@ -319,7 +435,7 @@ let changeibendo = (e) => {
               //查詢資料庫記錄
               axios({
                 method: "POST",
-                url: "http://localhost:3000/ShippingInfo",
+                baseURL: "http://localhost:3000/ShippingInfo",
                 headers: {
                   "Access-Control-Allow-Origin": "*",
                   "Content-Type": "application/json",
@@ -357,7 +473,8 @@ let changeibendo = (e) => {
     //兌換紀錄查詢
     axios({
       method: "post",
-      baseURL: "http://localhost:3000/GetExchangeLogs",
+      baseURL:
+        "https://zhj.gameflier.com/service/BonusReward/api/GetExchangeLogs",
       data: zhjgamdID,
     })
       .then((res) => {
@@ -384,11 +501,11 @@ let changeibendo = (e) => {
       .catch((err) => {
         axios({
           method: "post",
-          baseURL:
-            "https://zhj.gameflier.com/service/BonusReward/api/GetExchangeLogs",
+          baseURL: "http://localhost:3000/GetExchangeLogs",
           data: zhjgamdID,
         })
           .then((res) => {
+            console.log(res);
             bonesLog.value = "";
             for (let index = 0; index < res.data.Data.length; index++) {
               let itemname = res.data.Data[index].itemname;
@@ -398,14 +515,14 @@ let changeibendo = (e) => {
               let status = res.data.Data[index].status;
               let sum = res.data.Data[index].sum;
 
-              bonesLog.value += `
-          <p>${itemname}</p>
+              bonesLog.value += `<div class="bonesLogflex">
           <p>${logtime}</p>
-          <p>${points}</p>
-          <p>${remark}</p>
           <p>${status}</p>
+          <p>${itemname}</p>
+          <p>${points}</p>
           <p>${sum}</p>
-            `;
+          <p>${remark}</p>
+        </div>`;
             }
           })
           .catch((err) => {});
@@ -458,7 +575,7 @@ axios({
   .catch((error) => {
     axios({
       method: "POST",
-      baseURL: "http://localhost:3000/BonusReward",
+      baseURL: "http://localhost:3000/GetExchange",
       headers: {
         "Access-Control-Allow-Origin": "*",
         "Content-Type": "application/json",
@@ -536,35 +653,6 @@ let addCreate = (e) => {
     IDCardRS: demo.value,
     IDCardWS: demo2.value,
   };
-
-  axios({
-    method: "POST",
-    baseURL: "https://zhj.gameflier.com/service/BonusReward/api/GetExchange",
-    headers: {
-      "Access-Control-Allow-Origin": "*",
-      "Content-Type": "application/json",
-    },
-    data: addID,
-  })
-    .then((res) => {
-      alert(res.data.Message);
-    })
-    .catch((error) => {
-      axios({
-        method: "POST",
-        baseURL: "http://localhost:3000/Create",
-        headers: {
-          "Access-Control-Allow-Origin": "*",
-          "Content-Type": "application/json",
-        },
-        data: addID,
-      })
-        .then((res) => {
-          alert(res.data.Message);
-          bonesPage = 6;
-        })
-        .catch((err) => {});
-    });
 };
 </script>
 <style lang="scss" scoped>

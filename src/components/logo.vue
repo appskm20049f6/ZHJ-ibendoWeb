@@ -25,6 +25,7 @@ let logOut = () => {
   sessionStorage.removeItem("role_id");
   sessionStorage.removeItem("server_id");
   sessionStorage.removeItem("role_name");
+  sessionStorage.removeItem("token");
   document.location.href = sessionStorage.getItem("url");
 };
 </script>

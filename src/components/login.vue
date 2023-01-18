@@ -104,7 +104,6 @@ let phonelogin = (e) => {
     phone: phoneTop.value + phoneNumber.value.replace(/^0+/, ""),
     password: typePassword.value,
   };
-  console.log(logindata);
 
   axios({
     method: "POST",
@@ -130,7 +129,9 @@ let phonelogin = (e) => {
         data: logindata,
       })
         .then((response) => {
+          console.log(response);
           sessionStorage.setItem("gameId", response.data.Data.GameId);
+          sessionStorage.setItem("token", response.data.Data.Token);
           window.location.reload();
         })
         .catch((error) => {

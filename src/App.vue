@@ -31,8 +31,10 @@ if (url.indexOf("?") != -1) {
   let ary1 = url.split("?");
   let ary2 = ary1[1].split("&");
   let ary3 = ary2[0].split("=");
+  let ary4 = ary2[2].split("=");
   sessionStorage.setItem("gameId", ary3[1]);
   sessionStorage.setItem("url", ary1[0]);
+  sessionStorage.setItem("token", ary4[1]);
   document.location.href = sessionStorage.getItem("url");
 }
 </script>
