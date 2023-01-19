@@ -44,7 +44,7 @@ if (url.indexOf("?") != -1) {
   display: flex;
   justify-content: flex-end;
   @media screen and (max-width: 836px) {
-    justify-content: center;
+    justify-content: flex-end;
   }
 }
 
@@ -55,7 +55,10 @@ if (url.indexOf("?") != -1) {
     margin-top: 50%;
   }
   @media screen and (max-width: 414px) {
-    margin-top: 70%;
+    margin-top: 50%;
+  }
+  @media screen and (max-width: 375px) {
+    margin-top: 60%;
   }
 }
 </style>

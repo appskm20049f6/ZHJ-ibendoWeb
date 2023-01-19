@@ -59,7 +59,13 @@
         <input type="email" v-model="email" placeholder="sophie@example.com" />
       </label>
       <label for=""
-        ><p>郵遞區號：</p>
+        ><p>
+          郵遞區號
+          <a
+            href="https://www.post.gov.tw/post/internet/Postal/index.jsp?ID=208"
+            >?</a
+          >：
+        </p>
         <input type="text" v-model="postalcode" />
       </label>
       <label for=""
@@ -195,6 +201,7 @@
 
 <script setup>
 import { ref } from "vue";
+import Swal from "sweetalert2";
 
 let server_id = ref("");
 let GameID = ref("此伺服器尚未持有角色");
@@ -214,7 +221,7 @@ const phoneNumber = ref("");
 const email = ref("");
 const postalcode = ref("");
 const addides = ref("");
-const years = ref("是");
+const years = ref("");
 
 let changeServer = () => {
   loading.value = 1;
@@ -292,9 +299,7 @@ let changeServer = () => {
               res.data.Data.model[0].server_name
             );
             loading.value = 2;
-          }
-
-          if (server_id.value == res.data.Data.model[1].server_id) {
+          } else if (server_id.value == res.data.Data.model[1].server_id) {
             GameID.value = res.data.Data.model[1].role_name;
             sessionStorage.setItem("role_id", res.data.Data.model[1].role_id);
             sessionStorage.setItem(
@@ -310,6 +315,10 @@ let changeServer = () => {
               res.data.Data.model[1].server_name
             );
             loading.value = 2;
+          } else {
+            loading.value = 2;
+            GameID.value = "此伺服器您尚未持有任何角色";
+            alert("發生未知錯誤請聯繫客服人員進行回報");
           }
         })
         .catch((err) => {
@@ -488,13 +497,20 @@ let changeibendo = (e) => {
   }
 
   if (e == 4) {
-    bonesPage.value = e;
     sessionStorage.setItem("uname", name.value);
     sessionStorage.setItem("phone", phoneNumber.value);
     sessionStorage.setItem("email", email.value);
     sessionStorage.setItem("zcode", postalcode.value);
     sessionStorage.setItem("address", addides.value);
     sessionStorage.setItem("adult", years.value);
+    if (years.value == "否") {
+      alert("未滿18歲請前往官網下載活動領獎單");
+      window.open(
+        "http://serviceplus.gameflier.com/info/content.aspx?count=done&id=11"
+      );
+    } else {
+      bonesPage.value = e;
+    }
   }
   if (e == 5) {
     bonesPage.value = e;
@@ -609,6 +625,8 @@ let addCreate = (e) => {
     zcode: sessionStorage.getItem("zcode"),
     address: sessionStorage.getItem("address"),
     adult: sessionStorage.getItem("adult"),
+    rolename: sessionStorage.getItem("role_name"),
+    servername: sessionStorage.getItem("server_name"),
     IDCardRS: demo.value,
     IDCardWS: demo2.value,
     token: sessionStorage.getItem("token"),
@@ -637,7 +655,10 @@ let addCreate = (e) => {
           loading.value = 2;
           alert(res.data.Message);
         })
-        .catch((err) => {});
+        .catch((err) => {
+          loading.value = 2;
+          alert("已經有創建資料");
+        });
     });
 };
 
@@ -985,19 +1006,45 @@ let loading = ref(2);
     top: 70%;
   }
   .years {
-    width: 50%;
+    width: 55%;
     display: flex;
-    @media screen and (max-width: 414px) {
-      width: 70%;
+    justify-content: flex-start;
+    @media screen and (max-width: 836px) {
+      width: 75%;
     }
+    @media screen and (max-width: 414px) {
+      width: 100%;
+    }
+
     input {
-      width: 5%;
+      width: 7%;
+      @media screen and (max-width: 1280px) {
+        width: 7%;
+      }
     }
     p:first-child {
-      width: 80%;
+      width: 45%;
+      @media screen and (max-width: 1280px) {
+        width: 55%;
+      }
+      @media screen and (max-width: 836px) {
+        width: 35%;
+      }
+      @media screen and (max-width: 414px) {
+        width: 50%;
+      }
     }
     p {
-      width: 10%;
+      width: 5%;
+      @media screen and (max-width: 1680px) {
+        width: 10%;
+      }
+      @media screen and (max-width: 836px) {
+        width: 5%;
+      }
+      @media screen and (max-width: 414px) {
+        width: 1%;
+      }
     }
   }
   label:first-child {

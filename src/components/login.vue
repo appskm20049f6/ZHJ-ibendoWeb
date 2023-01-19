@@ -1,6 +1,6 @@
 <template>
   <div class="ibendologo">
-    <img src="../../public/img/ibendo-logo.png" alt="" />
+    <img src="../assets/phone-login2.png" alt="" />
   </div>
   <div class="login" v-if="loginType === 1">
     <div class="loginbg">
@@ -162,6 +162,9 @@ let phonelogin = (e) => {
       @media (max-width: 834px) {
         width: 50%;
       }
+      @media (max-width: 414px) {
+        width: 80%;
+      }
     }
   }
 }
@@ -172,6 +175,9 @@ let phonelogin = (e) => {
   img {
     @media screen and (max-width: 836px) {
       width: 50%;
+    }
+    @media (max-width: 414px) {
+      width: 80%;
     }
     width: 25%;
   }
@@ -191,6 +197,9 @@ let phonelogin = (e) => {
   }
   @media (max-width: 836px) {
     width: 40%;
+  }
+  @media (max-width: 414px) {
+    width: 60%;
   }
 }
 
