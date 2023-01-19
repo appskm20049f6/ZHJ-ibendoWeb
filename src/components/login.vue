@@ -226,7 +226,7 @@ let phonelogin = (e) => {
     display: flex;
     button {
       margin: auto;
-      width: 30%;
+      width: 50%;
     }
   }
   select {

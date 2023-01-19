@@ -46,6 +46,7 @@
       </div>
     </div>
     <div id="addides" class="addidesbg" v-if="bonesPage == 2">
+      <img src="../assets/yajiru.png" alt="" @click="changeibendo(1)" />
       <label for=""
         ><p>姓名：</p>
         <input type="text" v-model="name" />
@@ -710,8 +711,11 @@ let loading = ref(2);
     display: flex;
     color: rgb(253, 230, 99);
     @media screen and (max-width: 414px) {
+      display: flex;
+      width: 100%;
       font-size: 0.8rem;
       flex-direction: column;
+      align-items: center;
     }
     p {
       @media screen and (max-width: 1280px) {
@@ -729,7 +733,7 @@ let loading = ref(2);
     }
   }
   button {
-    margin-top: 1%;
+    margin-top: 3%;
     top: 83%;
     position: absolute;
     display: flex;
@@ -998,13 +1002,16 @@ let loading = ref(2);
     background-size: 150% 100%;
   }
   img {
-    width: 60%;
-    position: absolute;
+    width: 5%;
     z-index: 1;
     transform: translate(-50%, -50%);
-    left: 50%;
-    top: 70%;
+    margin-right: 60%;
+    @media screen and (max-width: 836px) {
+      margin-top: 10%;
+      margin-right: 80%;
+    }
   }
+
   .years {
     width: 55%;
     display: flex;
@@ -1043,7 +1050,7 @@ let loading = ref(2);
         width: 5%;
       }
       @media screen and (max-width: 414px) {
-        width: 1%;
+        width: 10%;
       }
     }
   }
@@ -1199,6 +1206,7 @@ let loading = ref(2);
         display: flex;
         width: 25%;
         justify-content: flex-end;
+
         @media screen and (max-width: 1440px) {
           width: 35%;
         }
@@ -1212,7 +1220,9 @@ let loading = ref(2);
         }
       }
       span {
+        display: flex;
         margin-left: 2%;
+        overflow: scroll;
         @media screen and (max-width: 836px) {
           width: 35%;
           font-size: 1.4rem;
