@@ -5,6 +5,18 @@
   font-size: 1rem;
 }
 
+@font-face {
+  font-family: 'wakan';
+  src: url('./assets/wakan.woff') format("woff"),
+    url('./assets/wakan.ttf') format("opentype"),
+    url('./assets/wakan.eot') format("embedded-opentype");
+}
+
+* {
+  font-family: 'wakan';
+}
+
+
 body {
   min-height: 100vh;
   background-color: black;

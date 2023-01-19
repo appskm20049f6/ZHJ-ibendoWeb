@@ -1,4 +1,5 @@
 <template>
+  <div class="loading" v-if="loading == 1"></div>
   <div class="award">
     <div class="awardbotton" v-if="serverPage == 0">
       <div class="serverselect">
@@ -216,6 +217,7 @@ const addides = ref("");
 const years = ref("是");
 
 let changeServer = () => {
+  loading.value = 1;
   axios({
     method: "POST",
     baseURL: "http://localhost:3000/QueryUserRole",
@@ -241,6 +243,7 @@ let changeServer = () => {
           "server_name",
           res.data.Data.model[0].server_name
         );
+        loading.value = 2;
       }
 
       if (server_id.value == res.data.Data.model[1].server_id) {
@@ -252,6 +255,7 @@ let changeServer = () => {
           "server_name",
           res.data.Data.model[1].server_name
         );
+        loading.value = 2;
       }
     })
     .catch((error) => {
@@ -264,37 +268,53 @@ let changeServer = () => {
           "Content-Type": "application/json",
         },
         data: zhjgamdID,
-      }).then((res) => {
-        GameID.value = "此伺服器您尚未持有任何角色";
-        sessionStorage.removeItem("role_id");
-        sessionStorage.removeItem("server_id");
-        sessionStorage.removeItem("role_name");
-        sessionStorage.removeItem("server_name");
+      })
+        .then((res) => {
+          GameID.value = "此伺服器您尚未持有任何角色";
+          sessionStorage.removeItem("role_id");
+          sessionStorage.removeItem("server_id");
+          sessionStorage.removeItem("role_name");
+          sessionStorage.removeItem("server_name");
 
-        if (server_id.value == res.data.Data.model[0].server_id) {
-          GameID.value = res.data.Data.model[0].role_name;
-          sessionStorage.setItem("role_id", res.data.Data.model[0].role_id);
-          sessionStorage.setItem("server_id", res.data.Data.model[0].server_id);
-          sessionStorage.setItem("role_name", res.data.Data.model[0].role_name);
-          sessionStorage.setItem(
-            "server_name",
-            res.data.Data.model[0].server_name
-          );
-          location.reload();
-        }
+          if (server_id.value == res.data.Data.model[0].server_id) {
+            GameID.value = res.data.Data.model[0].role_name;
+            sessionStorage.setItem("role_id", res.data.Data.model[0].role_id);
+            sessionStorage.setItem(
+              "server_id",
+              res.data.Data.model[0].server_id
+            );
+            sessionStorage.setItem(
+              "role_name",
+              res.data.Data.model[0].role_name
+            );
+            sessionStorage.setItem(
+              "server_name",
+              res.data.Data.model[0].server_name
+            );
+            loading.value = 2;
+          }
 
-        if (server_id.value == res.data.Data.model[1].server_id) {
-          GameID.value = res.data.Data.model[1].role_name;
-          sessionStorage.setItem("role_id", res.data.Data.model[1].role_id);
-          sessionStorage.setItem("server_id", res.data.Data.model[1].server_id);
-          sessionStorage.setItem("role_name", res.data.Data.model[1].role_name);
-          sessionStorage.setItem(
-            "server_name",
-            res.data.Data.model[1].server_name
-          );
-          location.reload();
-        }
-      });
+          if (server_id.value == res.data.Data.model[1].server_id) {
+            GameID.value = res.data.Data.model[1].role_name;
+            sessionStorage.setItem("role_id", res.data.Data.model[1].role_id);
+            sessionStorage.setItem(
+              "server_id",
+              res.data.Data.model[1].server_id
+            );
+            sessionStorage.setItem(
+              "role_name",
+              res.data.Data.model[1].role_name
+            );
+            sessionStorage.setItem(
+              "server_name",
+              res.data.Data.model[1].server_name
+            );
+            loading.value = 2;
+          }
+        })
+        .catch((err) => {
+          loading.value = 2;
+        });
     });
 };
 
@@ -580,6 +600,7 @@ let upload2 = (e) => {
 };
 
 let addCreate = (e) => {
+  loading.value = 1;
   let addID = {
     gameid: sessionStorage.getItem("gameId"),
     uname: sessionStorage.getItem("uname"),
@@ -603,6 +624,7 @@ let addCreate = (e) => {
     },
   })
     .then((res) => {
+      loading.value = 2;
       alert(res.data.Message);
     })
     .catch((err) => {
@@ -612,13 +634,30 @@ let addCreate = (e) => {
         data: zhjgamdID,
       })
         .then((res) => {
+          loading.value = 2;
           alert(res.data.Message);
         })
         .catch((err) => {});
     });
 };
+
+let loading = ref(2);
 </script>
 <style lang="scss" scoped>
+.loading {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-image: url("../assets/loading.gif");
+  background-size: 5% 10%;
+  background-repeat: no-repeat;
+  background-position: center center;
+  z-index: 16;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #000000b9;
+}
 .serverselect {
   position: relative;
   display: flex;
@@ -817,6 +856,7 @@ let addCreate = (e) => {
   color: #f9f7f2;
   position: relative;
   display: flex;
+  margin-left: 2%;
   @media screen and (max-width: 414px) {
     width: 40%;
     align-items: center;
@@ -904,6 +944,7 @@ let addCreate = (e) => {
   width: 60%;
   display: flex;
   flex-direction: column;
+
   @media screen and (max-width: 836px) {
     width: 100%;
     align-items: center;
