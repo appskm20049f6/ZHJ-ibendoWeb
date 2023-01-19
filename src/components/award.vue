@@ -969,10 +969,12 @@ let loading = ref(2);
   @media screen and (max-width: 834px) {
     width: 90%;
     padding: 8%;
+    background-size: 150% 100%;
   }
   @media screen and (max-width: 414px) {
-    width: 90%;
+    width: 90vw;
     padding: 10%;
+    background-size: 150% 100%;
   }
   img {
     width: 60%;
@@ -998,6 +1000,14 @@ let loading = ref(2);
       width: 10%;
     }
   }
+  label:first-child {
+    @media screen and (max-width: 836px) {
+      margin-top: 10%;
+    }
+    @media screen and (max-width: 414px) {
+      margin-top: 15%;
+    }
+  }
   label {
     font-size: 2rem;
     display: flex;
@@ -1018,8 +1028,14 @@ let loading = ref(2);
       }
     }
     input {
-      height: 2vh;
+      height: 1.5rem;
       width: 30%;
+      @media screen and (max-width: 836px) {
+        width: 50%;
+      }
+      @media screen and (max-width: 414px) {
+        flex-grow: 1;
+      }
     }
   }
   .button {
