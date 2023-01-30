@@ -116,6 +116,7 @@ let phonelogin = (e) => {
   })
     .then((response) => {
       sessionStorage.setItem("gameId", response.data.Data.GameId);
+      sessionStorage.setItem("token", response.data.Data.Token);
       window.location.reload();
     })
     .catch((error) => {

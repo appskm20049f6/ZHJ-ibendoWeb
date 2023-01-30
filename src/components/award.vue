@@ -64,6 +64,7 @@
           郵遞區號
           <a
             href="https://www.post.gov.tw/post/internet/Postal/index.jsp?ID=208"
+            target="_blank"
             >?</a
           >：
         </p>
@@ -230,8 +231,7 @@ let changeServer = () => {
     method: "POST",
     baseURL: "http://localhost:3000/QueryUserRole",
     headers: {
-      "Access-Control-Allow-Origin": "*",
-      "Content-Type": "application/json",
+      "Content-Type": "application/x-www-form-urlencoded",
     },
     data: zhjgamdID,
   })
@@ -272,8 +272,7 @@ let changeServer = () => {
         baseURL:
           "https://zhj.gameflier.com/service/BonusReward/api/QueryUserRole",
         headers: {
-          "Access-Control-Allow-Origin": "*",
-          "Content-Type": "application/json",
+          "Content-Type": "application/x-www-form-urlencoded",
         },
         data: zhjgamdID,
       })
@@ -356,8 +355,7 @@ let changeibendo = (e) => {
       method: "POST",
       baseURL: "https://zhj.gameflier.com/service/BonusReward/api/CheckGameID",
       headers: {
-        "Access-Control-Allow-Origin": "*",
-        "Content-Type": "application/json",
+        "Content-Type": "application/x-www-form-urlencoded",
       },
       data: zhjgamdID,
     })
@@ -369,8 +367,7 @@ let changeibendo = (e) => {
             baseURL:
               "https://zhj.gameflier.com/service/BonusReward/api/ShippingInfo",
             headers: {
-              "Access-Control-Allow-Origin": "*",
-              "Content-Type": "application/json",
+              "Content-Type": "application/x-www-form-urlencoded",
             },
             data: zhjgamdID,
           })
@@ -395,8 +392,7 @@ let changeibendo = (e) => {
           method: "POST",
           baseURL: "http://localhost:3000/CheckGameID",
           headers: {
-            "Access-Control-Allow-Origin": "*",
-            "Content-Type": "application/json",
+            "Content-Type": "application/x-www-form-urlencoded",
           },
           data: zhjgamdID,
         })
@@ -405,10 +401,8 @@ let changeibendo = (e) => {
               //查詢資料庫記錄
               axios({
                 method: "POST",
-                baseURL: "http://localhost:3000/ShippingInfo",
                 headers: {
-                  "Access-Control-Allow-Origin": "*",
-                  "Content-Type": "application/json",
+                  "Content-Type": "application/x-www-form-urlencoded",
                 },
                 data: zhjgamdID,
               })
@@ -445,6 +439,9 @@ let changeibendo = (e) => {
       method: "post",
       baseURL:
         "https://zhj.gameflier.com/service/BonusReward/api/GetExchangeLogs",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
       data: zhjgamdID,
     })
       .then((res) => {
@@ -471,6 +468,9 @@ let changeibendo = (e) => {
         axios({
           method: "post",
           baseURL: "http://localhost:3000/GetExchangeLogs",
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded",
+          },
           data: zhjgamdID,
         })
           .then((res) => {
@@ -505,7 +505,7 @@ let changeibendo = (e) => {
     sessionStorage.setItem("address", addides.value);
     sessionStorage.setItem("adult", years.value);
     if (years.value == "否") {
-      alert("未滿18歲請前往官網下載活動領獎單");
+      alert("未滿18歲請前往官網下載活動領獎單，並需要請法定代理人填寫相關資料");
       window.open(
         "http://serviceplus.gameflier.com/info/content.aspx?count=done&id=11"
       );
@@ -522,8 +522,7 @@ axios({
   method: "POST",
   baseURL: "https://zhj.gameflier.com/service/BonusReward/api/GetExchange",
   headers: {
-    "Access-Control-Allow-Origin": "*",
-    "Content-Type": "application/json",
+    "Content-Type": "application/x-www-form-urlencoded",
   },
   data: zhjgamdID,
 })
@@ -552,8 +551,7 @@ axios({
       method: "POST",
       baseURL: "http://localhost:3000/GetExchange",
       headers: {
-        "Access-Control-Allow-Origin": "*",
-        "Content-Type": "application/json",
+        "Content-Type": "application/x-www-form-urlencoded",
       },
       data: zhjgamdID,
     })
@@ -643,23 +641,24 @@ let addCreate = (e) => {
     },
   })
     .then((res) => {
+      if (res.data.Code == -99) {
+        alert(res.data.Message);
+        sessionStorage.removeItem("gameId");
+        sessionStorage.removeItem("role_id");
+        sessionStorage.removeItem("server_id");
+        sessionStorage.removeItem("role_name");
+        sessionStorage.removeItem("token");
+        document.location.href = sessionStorage.getItem("url");
+      } else if (res.data.Code == -4) {
+        alert(res.data.Message);
+      } else {
+        alert(res.data.Message);
+      }
+
       loading.value = 2;
-      alert(res.data.Message);
     })
     .catch((err) => {
-      axios({
-        method: "post",
-        baseURL: "http://localhost:3000/Create",
-        data: zhjgamdID,
-      })
-        .then((res) => {
-          loading.value = 2;
-          alert(res.data.Message);
-        })
-        .catch((err) => {
-          loading.value = 2;
-          alert("已經有創建資料");
-        });
+      alert("已經有創建資料");
     });
 };
 
@@ -758,10 +757,6 @@ let loading = ref(2);
       width: 100%;
       display: flex;
       justify-content: center;
-
-      p:last-child {
-        font-size: 0.8rem;
-      }
     }
     .bonesloglog::-webkit-scrollbar {
       width: 5px;
@@ -774,9 +769,10 @@ let loading = ref(2);
       width: 100%;
       flex-wrap: wrap;
       overflow-y: scroll;
-      height: 40vh;
       p {
-        font-size: 0.8rem;
+        padding: 1%;
+        text-align: center;
+        font-size: 1.6rem;
         width: 16vw;
         height: 4vw;
         display: flex;
@@ -786,9 +782,14 @@ let loading = ref(2);
         background-size: 100% 100%;
         background-position: left top;
         color: white;
+        @media screen and (max-width: 835px) {
+          width: 16vw;
+          height: 7vw;
+          font-size: 1rem;
+        }
         @media screen and (max-width: 414px) {
           width: 16vw;
-          height: 18vw;
+          height: 10vw;
           font-size: 0.3rem;
         }
       }
@@ -809,6 +810,11 @@ let loading = ref(2);
         background-size: 100% 100%;
         background-position: left top;
         color: white;
+        @media screen and (max-width: 835px) {
+          width: 16vw;
+          height: 5vw;
+          font-size: 1rem;
+        }
         @media screen and (max-width: 414px) {
           width: 16vw;
           height: 5vw;

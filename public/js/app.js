@@ -15,14 +15,20 @@ let convert = (e) => {
     data: zhjgamdID,
   })
     .then((res) => {
+      console.log(res);
       let itemname = "測試";
+      let points = "2213";
       for (let index = 0; index < 3; index++) {
         if (res.data.Data.list[index].exchangeid == e) {
           itemname = res.data.Data.list[index].itemname;
+          points = res.data.Data.list[index].points;
         }
       }
 
-      if (confirm(`確認是否要兌換${itemname}`) == true) {
+      if (
+        confirm(`確認是否要兌換${itemname}\n將會消耗目前積分：${points}`) ==
+        true
+      ) {
         let datadata = {
           gameid: sessionStorage.getItem("gameId"),
           serverid: sessionStorage.getItem("server_id"),
@@ -38,7 +44,6 @@ let convert = (e) => {
           data: datadata,
         })
           .then((res) => {
-            console.log(res);
             if (res.data.Code == -99) {
               alert(res.data.Message);
               sessionStorage.removeItem("gameId");
@@ -50,6 +55,7 @@ let convert = (e) => {
             } else if (res.data.Code == -4) {
               alert(res.data.Message);
             } else {
+              location.reload();
               alert(res.data.Message);
             }
           })
