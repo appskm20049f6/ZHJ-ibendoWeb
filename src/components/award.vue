@@ -361,6 +361,7 @@ let changeibendo = (e) => {
     })
       .then((res) => {
         if (res.data.Data.exists == true) {
+          loading.value = 1;
           //查詢資料庫記錄
           axios({
             method: "POST",
@@ -372,6 +373,7 @@ let changeibendo = (e) => {
             data: zhjgamdID,
           })
             .then((res) => {
+              loading.value = 2;
               name.value = res.data.Data.uname;
               phoneNumber.value = res.data.Data.phone;
               email.value = res.data.Data.email;
@@ -514,7 +516,13 @@ let changeibendo = (e) => {
     }
   }
   if (e == 5) {
-    bonesPage.value = e;
+    if (demo.value == "1") {
+      alert("請記得上傳身分證正面");
+    } else if (demo2.value == "1") {
+      alert("請記得上傳身分證反面");
+    } else {
+      bonesPage.value = e;
+    }
   }
 };
 
@@ -583,7 +591,7 @@ let idcardopen = ref(1);
 let idcarduploadon = document.querySelector("#idcarduploadon");
 let idcardpreon = document.querySelector("#idcardpreon");
 let input = document.querySelector("#idcardon");
-let demo = ref("");
+let demo = ref("1");
 
 let reader = new FileReader();
 reader.onload = (e) => {
@@ -601,7 +609,7 @@ let idcardclose = ref(1);
 let idcarduploadclose = document.querySelector("#idcarduploadon");
 let idcardpreclose = document.querySelector("#idcardpreon");
 let input2 = document.querySelector("#idcardon");
-let demo2 = ref("");
+let demo2 = ref("1");
 
 let reader2 = new FileReader();
 reader2.onload = (e) => {
@@ -615,54 +623,64 @@ let upload2 = (e) => {
 };
 
 let addCreate = (e) => {
-  loading.value = 1;
-  let addID = {
-    gameid: sessionStorage.getItem("gameId"),
-    uname: sessionStorage.getItem("uname"),
-    phone: sessionStorage.getItem("phone"),
-    email: sessionStorage.getItem("email"),
-    zcode: sessionStorage.getItem("zcode"),
-    address: sessionStorage.getItem("address"),
-    adult: sessionStorage.getItem("adult"),
-    rolename: sessionStorage.getItem("role_name"),
-    servername: sessionStorage.getItem("server_name"),
-    IDCardRS: demo.value,
-    IDCardWS: demo2.value,
-    token: sessionStorage.getItem("token"),
-  };
+  if (
+    sessionStorage.getItem("uname").length >= 1 &&
+    sessionStorage.getItem("phone").length >= 8 &&
+    sessionStorage.getItem("email").length >= 5 &&
+    sessionStorage.getItem("zcode").length >= 2 &&
+    sessionStorage.getItem("address").length >= 1
+  ) {
+    loading.value = 1;
+    let addID = {
+      gameid: sessionStorage.getItem("gameId"),
+      uname: sessionStorage.getItem("uname"),
+      phone: sessionStorage.getItem("phone"),
+      email: sessionStorage.getItem("email"),
+      zcode: sessionStorage.getItem("zcode"),
+      address: sessionStorage.getItem("address"),
+      adult: sessionStorage.getItem("adult"),
+      rolename: sessionStorage.getItem("role_name"),
+      servername: sessionStorage.getItem("server_name"),
+      IDCardRS: demo.value,
+      IDCardWS: demo2.value,
+      token: sessionStorage.getItem("token"),
+    };
 
-  axios({
-    method: "post",
-    baseURL:
-      "https://zhj.gameflier.com/service/BonusReward/api/ShippingInfo/Create",
-    data: addID,
-    headers: {
-      "Content-Type": "application/x-www-form-urlencoded",
-    },
-  })
-    .then((res) => {
-      if (res.data.Code == -99) {
-        alert(res.data.Message);
-        sessionStorage.removeItem("gameId");
-        sessionStorage.removeItem("role_id");
-        sessionStorage.removeItem("server_id");
-        sessionStorage.removeItem("role_name");
-        sessionStorage.removeItem("token");
-        document.location.href = sessionStorage.getItem("url");
-      } else if (res.data.Code == -4) {
-        location.reload();
-        alert(res.data.Message);
-      } else {
-        location.reload();
-        alert(res.data.Message);
-      }
-
-      loading.value = 2;
+    axios({
+      method: "post",
+      baseURL:
+        "https://zhj.gameflier.com/service/BonusReward/api/ShippingInfo/Create",
+      data: addID,
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
     })
-    .catch((err) => {
-      location.reload();
-      alert("已經有創建資料");
-    });
+      .then((res) => {
+        if (res.data.Code == -99) {
+          alert(res.data.Message);
+          sessionStorage.removeItem("gameId");
+          sessionStorage.removeItem("role_id");
+          sessionStorage.removeItem("server_id");
+          sessionStorage.removeItem("role_name");
+          sessionStorage.removeItem("token");
+          document.location.href = sessionStorage.getItem("url");
+        } else if (res.data.Code == -4) {
+          location.reload();
+          alert(res.data.Message);
+        } else {
+          location.reload();
+          alert(res.data.Message);
+        }
+
+        loading.value = 2;
+      })
+      .catch((err) => {
+        location.reload();
+        alert("已經有創建資料");
+      });
+  } else {
+    alert("請重新確認資料是否填寫正確");
+  }
 };
 
 let loading = ref(2);
@@ -673,7 +691,7 @@ let loading = ref(2);
   width: 100%;
   height: 100%;
   background-image: url("../assets/loading.gif");
-  background-size: 5% 10%;
+  background-size: 5rem 5rem;
   background-repeat: no-repeat;
   background-position: center center;
   z-index: 16;
