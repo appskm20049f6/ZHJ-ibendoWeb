@@ -91,7 +91,7 @@
           <th>兌換獎勵</th>
           <th>積分變動</th>
           <th>變動積分</th>
-          <th>虛寶序號</th>
+          <th>獎勵內容</th>
         </tr>
         <div class="bonesloglog" v-html="bonesLog"></div>
       </table>
@@ -650,14 +650,17 @@ let addCreate = (e) => {
         sessionStorage.removeItem("token");
         document.location.href = sessionStorage.getItem("url");
       } else if (res.data.Code == -4) {
+        location.reload();
         alert(res.data.Message);
       } else {
+        location.reload();
         alert(res.data.Message);
       }
 
       loading.value = 2;
     })
     .catch((err) => {
+      location.reload();
       alert("已經有創建資料");
     });
 };
@@ -767,6 +770,7 @@ let loading = ref(2);
     .bonesloglog {
       display: flex;
       width: 100%;
+      height: 55vh;
       flex-wrap: wrap;
       overflow-y: scroll;
       p {
@@ -774,7 +778,7 @@ let loading = ref(2);
         text-align: center;
         font-size: 1.6rem;
         width: 16vw;
-        height: 4vw;
+        height: 5vw;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -782,18 +786,35 @@ let loading = ref(2);
         background-size: 100% 100%;
         background-position: left top;
         color: white;
+        @media screen and (max-width: 1440px) {
+          padding: 1%;
+          font-size: 1.4rem;
+        }
         @media screen and (max-width: 835px) {
+          padding: 1%;
           width: 16vw;
           height: 7vw;
           font-size: 1rem;
         }
         @media screen and (max-width: 414px) {
-          width: 16vw;
-          height: 10vw;
-          font-size: 0.3rem;
+          padding: 1%;
+          width: 24vw;
+          height: 14vw;
+          font-size: 12px;
+        }
+      }
+      p:nth-child(2) {
+        @media screen and (max-width: 414px) {
+          display: none;
+        }
+      }
+      p:nth-child(5) {
+        @media screen and (max-width: 414px) {
+          display: none;
         }
       }
     }
+
     tr {
       display: flex;
       color: white;
@@ -816,9 +837,19 @@ let loading = ref(2);
           font-size: 1rem;
         }
         @media screen and (max-width: 414px) {
-          width: 16vw;
-          height: 5vw;
-          font-size: 0.3rem;
+          width: 24vw;
+          height: 10vw;
+          font-size: 12px;
+        }
+      }
+      th:nth-child(2) {
+        @media screen and (max-width: 414px) {
+          display: none;
+        }
+      }
+      th:nth-child(5) {
+        @media screen and (max-width: 414px) {
+          display: none;
         }
       }
 
@@ -873,7 +904,6 @@ let loading = ref(2);
   }
   @media screen and (max-width: 414px) {
     width: 80%;
-    margin-top: -5%;
   }
   a {
     width: 100%;
@@ -1008,13 +1038,16 @@ let loading = ref(2);
     background-size: 150% 100%;
   }
   img {
-    width: 5%;
+    width: 2rem;
+    height: 2rem;
     z-index: 1;
     transform: translate(-50%, -50%);
     margin-right: 60%;
     @media screen and (max-width: 836px) {
       margin-top: 10%;
       margin-right: 80%;
+      width: 1rem;
+      height: 1rem;
     }
   }
 
@@ -1203,6 +1236,7 @@ let loading = ref(2);
   @media screen and (max-width: 414px) {
     margin-top: -5%;
     background-size: 100% 100%;
+    width: 150%;
   }
   .checkpre {
     .pre {
@@ -1244,7 +1278,7 @@ let loading = ref(2);
     display: flex;
     margin-bottom: 2%;
     @media screen and (max-width: 414px) {
-      flex-direction: column;
+      margin-top: 1%;
     }
   }
   .checkpre {

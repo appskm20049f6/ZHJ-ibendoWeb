@@ -215,7 +215,7 @@ let phonelogin = (e) => {
       width: 40%;
     }
     @media screen and (max-width: 414px) {
-      width: 80%;
+      width: 90%;
     }
   }
 }
@@ -225,9 +225,13 @@ let phonelogin = (e) => {
     flex-direction: column;
     align-items: flex-end;
     display: flex;
+    @media screen and (max-width: 414px) {
+      margin-top: 8%;
+    }
     button {
       margin: auto;
       width: 50%;
+      height: 1.8rem;
     }
   }
   select {

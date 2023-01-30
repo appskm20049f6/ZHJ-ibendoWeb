@@ -61,4 +61,7 @@ if (url.indexOf("?") != -1) {
     margin-top: 60%;
   }
 }
+.awardDiv {
+  overflow: hidden;
+}
 </style>
