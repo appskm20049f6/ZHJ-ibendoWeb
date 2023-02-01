@@ -62,6 +62,9 @@ let login = (e) => {
   axios({
     method: "POST",
     url: "https://zhj.gameflier.com/service/BonusReward/api/GetOauthCallback",
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded",
+    },
     data: lourl,
   })
     .then((response) => {

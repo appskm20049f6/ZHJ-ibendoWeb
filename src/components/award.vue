@@ -198,6 +198,31 @@
         </div>
       </div>
     </div>
+    <div class="addidesbg3" v-if="bonesPage == 7">
+      <div class="checkpre">
+        <div class="pre">
+          <p>姓名:</p>
+          <span>{{ name }}</span>
+        </div>
+        <div class="pre">
+          <p>手機號碼:</p>
+          <span>{{ phoneNumber }}</span>
+        </div>
+        <div class="pre">
+          <p>E-mail:</p>
+          <span>{{ email }}</span>
+        </div>
+        <div class="pre">
+          <p>郵遞區號:</p>
+          <span>{{ postalcode }}</span>
+        </div>
+        <div class="pre">
+          <p>寄送地址:</p>
+          <span>{{ addides }}</span>
+        </div>
+      </div>
+      <button @click="addCreate(up)">確認無誤進行上傳</button>
+    </div>
   </div>
 </template>
 
@@ -507,6 +532,7 @@ let changeibendo = (e) => {
     sessionStorage.setItem("address", addides.value);
     sessionStorage.setItem("adult", years.value);
     if (years.value == "否") {
+      bonesPage.value = 7;
       alert("未滿18歲請前往官網下載活動領獎單，並需要請法定代理人填寫相關資料");
       window.open(
         "http://serviceplus.gameflier.com/info/content.aspx?count=done&id=11"
