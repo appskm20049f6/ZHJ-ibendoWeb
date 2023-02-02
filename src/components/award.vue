@@ -223,6 +223,30 @@
       </div>
       <button @click="addCreate(up)">確認無誤進行上傳</button>
     </div>
+    <div class="addidesbg3" v-if="bonesPage == 8">
+      <div class="checkpre">
+        <div class="pre">
+          <p>姓名:</p>
+          <span>{{ name }}</span>
+        </div>
+        <div class="pre">
+          <p>手機號碼:</p>
+          <span>{{ phoneNumber }}</span>
+        </div>
+        <div class="pre">
+          <p>E-mail:</p>
+          <span>{{ email }}</span>
+        </div>
+        <div class="pre">
+          <p>郵遞區號:</p>
+          <span>{{ postalcode }}</span>
+        </div>
+        <div class="pre">
+          <p>寄送地址:</p>
+          <span>{{ addides }}</span>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -406,10 +430,16 @@ let changeibendo = (e) => {
               addides.value = res.data.Data.address;
               demo.value = res.data.Data.IDCardRSBase64;
               demo2.value = res.data.Data.IDCardWSBase64;
+              console.log(demo);
+
+              if (demo.value == "") {
+                bonesPage.value = 8;
+              } else {
+                bonesPage.value = 6;
+              }
             })
             .catch((error) => {});
           //轉到v-ifbones6查看紀錄的頁面
-          bonesPage.value = 6;
         } else {
           bonesPage.value = e;
         }
@@ -736,12 +766,12 @@ let loading = ref(2);
     margin-top: 40%;
   }
   @media screen and (max-width: 414px) {
-    margin-top: 80%;
+    margin-top: 50%;
   }
   img {
     width: 70%;
     @media screen and (max-width: 414px) {
-      width: 100%;
+      width: 120%;
     }
   }
 
@@ -752,10 +782,12 @@ let loading = ref(2);
     color: rgb(253, 230, 99);
   }
   .role_name {
+    padding: 1%;
     top: 73%;
     position: absolute;
     display: flex;
     color: rgb(253, 230, 99);
+    margin-top: 1%;
     @media screen and (max-width: 414px) {
       display: flex;
       width: 100%;
@@ -779,12 +811,13 @@ let loading = ref(2);
     }
   }
   button {
-    margin-top: 3%;
+    margin-top: 2%;
     top: 83%;
     position: absolute;
     display: flex;
     @media screen and (max-width: 414px) {
       font-size: 0.8rem;
+      margin-top: 5%;
     }
   }
 }

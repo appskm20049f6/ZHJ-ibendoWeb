@@ -112,8 +112,7 @@ let phonelogin = (e) => {
     method: "POST",
     url: "https://zhj.gameflier.com/service/BonusReward/api/LoginByPassword",
     headers: {
-      "Access-Control-Allow-Origin": "*",
-      "Content-Type": "application/json",
+      "Content-Type": "application/x-www-form-urlencoded",
     },
     data: logindata,
   })
@@ -236,6 +235,11 @@ let phonelogin = (e) => {
       width: 50%;
       height: 1.8rem;
     }
+    .login-phone {
+      select {
+        width: 30%;
+      }
+    }
   }
   select {
     width: 23%;
@@ -243,7 +247,9 @@ let phonelogin = (e) => {
     margin-bottom: 2%;
   }
   input {
-    width: 75%;
+    height: 20px;
+    padding: 1%;
+    width: 68%;
     margin-bottom: 2%;
   }
 }
