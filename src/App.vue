@@ -1,63 +1,67 @@
 <template>
-  <div class="logo"><logo /></div>
-  <div class="login"><login /></div>
-  <div class="phonelogin"><phonelogin /></div>
-  <div class="award"><award /></div>
-  <div class="bones"><bones /></div>
-  <div class="addides"><addides /></div>
-  <div class="addidesIDcard"><addidesIDcard /></div>
-  <div class="boneslog"><boneslog /></div>
+  <div class="logoindex"><logo></logo></div>
+
+  <div class="loginindex" v-if="Div == 1">
+    <login></login>
+  </div>
+
+  <div class="awardDiv" v-if="Div == 2"><award></award></div>
 </template>
 
 <script setup>
 import logo from "./components/logo.vue";
 import login from "./components/login.vue";
-import phonelogin from "./components/phonelogin.vue";
 import award from "./components/award.vue";
-import bones from "./components/award/bones.vue";
-import addides from "./components/award/addides.vue";
-import addidesIDcard from "./components/award/addidesIDcard.vue";
-import boneslog from "./components/award/boneslog.vue";
+import { ref } from "@vue/reactivity";
+
+let Div = ref(1);
+
+if (sessionStorage.getItem("gameId") === null) {
+  Div.value = 1;
+} else {
+  if (sessionStorage.getItem("gameId").length > 4) {
+    Div.value = 2;
+  }
+}
+
+let url = window.location.href;
+sessionStorage.setItem("url", url);
+
+if (url.indexOf("?") != -1) {
+  let ary1 = url.split("?");
+  let ary2 = ary1[1].split("&");
+  let ary3 = ary2[0].split("=");
+  let ary4 = ary2[2].split("=");
+  sessionStorage.setItem("gameId", ary3[1]);
+  sessionStorage.setItem("url", ary1[0]);
+  sessionStorage.setItem("token", ary4[1]);
+  document.location.href = sessionStorage.getItem("url");
+}
 </script>
 
 <style scoped lang="scss">
-.logo {
+.logoindex {
   display: flex;
   justify-content: flex-end;
+  @media screen and (max-width: 836px) {
+    justify-content: flex-end;
+  }
 }
 
-.login {
-  display: none;
-  flex-direction: column;
-}
-.phonelogin {
-  display: none;
-  justify-content: center;
-  margin: auto;
-  flex-direction: column;
-  align-items: center;
-}
-.award {
-  width: 100%;
+.loginindex {
   display: flex;
-  justify-content: center;
-  align-items: center;
+  flex-direction: column;
+  @media screen and (max-width: 836px) {
+    margin-top: 50%;
+  }
+  @media screen and (max-width: 414px) {
+    margin-top: 50%;
+  }
+  @media screen and (max-width: 375px) {
+    margin-top: 60%;
+  }
 }
-.bones {
-  display: none;
-  justify-content: center;
-  align-items: flex-start;
-}
-.addides {
-  display: none;
-  flex-direction: row;
-}
-.addidesIDcard {
-  display: none;
-}
-.boneslog {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.awardDiv {
+  overflow: hidden;
 }
 </style>

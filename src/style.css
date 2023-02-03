@@ -2,13 +2,40 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-size: 1.4rem;
+  font-size: 1rem;
+
 }
 
+@font-face {
+  font-family: 'wakan';
+  src: url('./assets/wakan.woff') format("woff"),
+    url('./assets/wakan.ttf') format("opentype"),
+    url('./assets/wakan.eot') format("embedded-opentype");
+}
+
+* {
+  font-family: 'wakan';
+}
+
+
 body {
+  min-height: 100vh;
   background-color: black;
-  background-image: url("/public/img/body-background.png");
+  background-image: url("../public/img/body-background.png");
   background-repeat: no-repeat;
+  background-position: left center;
   background-size: cover;
+}
+
+@media screen and (max-width: 414px) {
+  body {
+    min-height: 100vh;
+    background-color: black;
+    background-image: url("../public/img/mobile-backgrond.png");
+    background-repeat: no-repeat;
+    background-position: left center;
+    background-size: cover;
+  }
+
 
 }
