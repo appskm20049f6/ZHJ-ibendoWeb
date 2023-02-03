@@ -245,6 +245,11 @@
           <p>寄送地址:</p>
           <span>{{ addides }}</span>
         </div>
+        <div @click="awardSlip()">
+          <br />
+          <p>若您已郵寄活動領獎單</p>
+          <p>可以點擊確認您郵寄內容</p>
+        </div>
       </div>
     </div>
   </div>
@@ -430,7 +435,6 @@ let changeibendo = (e) => {
               addides.value = res.data.Data.address;
               demo.value = res.data.Data.IDCardRSBase64;
               demo2.value = res.data.Data.IDCardWSBase64;
-              console.log(demo);
 
               if (demo.value == "") {
                 bonesPage.value = 8;
@@ -740,6 +744,30 @@ let addCreate = (e) => {
 };
 
 let loading = ref(2);
+
+let awardSlip = () => {
+  // axios({
+  //   method: "GET",
+  //   baseURL: `https://zhj.gameflier.com/service/BonusReward/UnadultPDF/${sessionStorage.getItem(
+  //     "gameId"
+  //   )}?token=${sessionStorage.getItem("token")}`,
+  //   headers: {
+  //     "Content-Type": "application/x-www-form-urlencoded",
+  //   },
+  // })
+  //   .then((res) => {
+  //     console.log(res);
+  //   })
+  //   .catch((err) => {
+  //     console.log(err);
+  //   });
+
+  window.open(
+    `https://zhj.gameflier.com/service/BonusReward/UnadultPDF/${sessionStorage.getItem(
+      "gameId"
+    )}?token=${sessionStorage.getItem("token")}`
+  );
+};
 </script>
 <style lang="scss" scoped>
 .loading {
@@ -1366,7 +1394,9 @@ let loading = ref(2);
     }
 
     p {
+      display: flex;
       margin-bottom: 1%;
+      justify-content: center;
     }
   }
 }
